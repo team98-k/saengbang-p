@@ -1,0 +1,226 @@
+.blank {
+	height: 180px;
+	margin-left: auto;
+	margin-right: auto;
+	line-height: 3;
+	font-size: 48px;
+	text-align: center;
+}
+
+.types {
+	width: auto;
+	height: auto;
+	margin: auto;
+	text-align: center;
+}
+
+.types ul {
+	margin: 0;
+	padding: 0;
+	width: auto;
+}
+
+.types li {
+	width: auto;
+	height: auto;
+	list-style: none;
+	display: inline-flex;
+	border: 1px solid lightgray;
+}
+
+.types a {
+	display: flex;
+	height: 60px;
+	width: 250px;
+	font-size: 17px;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+}
+
+.contents {
+	width: 1200px;
+	height: auto;
+	margin: 0 auto;
+	padding: 40px 10px;
+	box-sizing: border-box;
+}
+
+.items {
+	margin: 0;
+	padding: 0;
+	display: grid;
+	list-style: none;
+	grid-gap: 60px 25px;
+	grid-template-columns: repeat(4, 280px);
+	grid-template-rows: repeat(auto-fill, 350px);
+}
+
+.items a:hover img {
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+	-webkit-filter: blur(2px);
+	filter: blur(2px);
+}
+
+.item {
+	width: 280px;
+	height: 350px;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+.item:hover {
+	padding: 10px;
+	border-radius: 10px;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.itemImg {
+	width: 100%;
+	height: 190px;
+	position: relative;
+}
+
+.itemImg img {
+	width: 100%;
+	height: 100%;
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+input[class="like"]+label {
+	position: absolute;
+	display: inline-block;
+	top: 10px;
+	right: 10px;
+	margin: 0px;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	background-size: cover;
+	background-image: url("/imgs/unliked.png");
+}
+
+input[class="like"]:checked+label {
+	position: absolute;
+	display: inline-block;
+	top: 10px;
+	right: 10px;
+	margin: 0px;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	background-size: cover;
+	background-image: url("/imgs/liked.png");
+}
+
+input[class="like"] {
+	display: none;
+}
+
+
+label{
+	text-align: start;
+}
+
+
+
+
+
+.itemDesc {
+	width: 100%;
+	padding: 20px 5px;
+	box-sizing: border-box;
+}
+
+.roomType {
+	margin: 0;
+	height: 20px;
+	font-size: 12px;
+}
+
+.roomPrice {
+	margin: 0 0 5px 0;
+	height: 30px;
+	font-size: 18px;
+}
+
+.roomStatus,
+.roomDesc {
+	margin: 0;
+	height: 24px;
+	font-size: 14px;
+}
+
+.pagination-container {
+	user-select: none;
+	margin-top: 30px;
+	text-align: center;
+}
+
+.page-num-btn-container {
+	display: inline;
+}
+
+.previous-btn,
+.next-btn,
+.page-num-btn {
+	/* display: flex;
+   align-items: center;
+   justify-content: center; */
+	display: inline;
+	padding: 5px 10px;
+	border: 1px solid #d7d7d7;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16), 0 1px 2px rgba(0, 0, 0, 0.23);
+	cursor: pointer;
+}
+
+.previous-btn:hover,
+.next-btn:hover,
+.page-num-btn:hover {
+	font-weight: 800;
+	background-color: teal;
+	color: ghostwhite;
+}
+
+.selected {
+	font-weight: 800;
+	font-size: 1.1rem;
+	color: dodgerblue;
+}
+
+.post-container {
+	display: flex;
+	align-items: center;
+	border-radius: 10px;
+	border: 2px solid #d7d7d7;
+	margin: 15px;
+}
+
+.post-title {
+	font-size: 20px;
+}
+
+.post-number {
+	font-size: 15px;
+	padding: 15px;
+}
+
+.image_text {
+	position: absolute;
+	background-color: black;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: white;
+	z-index: 2;
+}
+
+#complate {
+	opacity: 0.5;
+}
+
+.proerty-th .proerty-item .item-thumb img {
+	max-height: 225px;
+}

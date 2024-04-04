@@ -1,0 +1,323 @@
+/* 밑 공간 안 생기게 할때 쓸 코드 */
+#wrapper {
+	height: auto;
+	min-height: 100%;
+}
+
+.navbar.navbar-default {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+}
+body {
+    padding-top: 115px; /* navbar의 높이에 맞게 조절하세요 */
+	padding-right: 0 !important;
+	background-color: rgb(249, 249, 249);
+}
+
+html, body {
+    margin: 0;
+    height: 100%;
+    user-select: none;
+}
+
+.topMenu {
+    height: 50px;
+    width: auto;
+    padding: 15px 15px;
+    display: flex;
+    align-items: center;
+    border: 1px solid lightgray;
+}
+
+.menu:hover {
+    color: teal;
+}
+/* 
+#loginHead {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-weight: 700;
+} */
+
+.topLogo {
+    margin-left: 30px;
+    display: inline;
+    align-items: center;
+}
+
+.topMenuNav {
+    /* width: 100; */
+    margin-right: 3%;
+    margin-left: auto;
+}
+
+.topMenuNav li {
+    list-style: none;
+    display: inline;
+    margin-left: 30px;
+}
+
+.alarmBtn {
+	position: relative;
+}
+
+.alarmTop {
+	background-color: ghostwhite;
+	box-shadow: -2px 2px 2px 0 rgba(0, 0, 0, 0.3);
+	content: "\00a0";
+	display: block;
+	height: 20px;
+	top: -10px;
+	right: 65px;
+	position: absolute;
+	transform: rotate(135deg);
+	width: 20px;
+}
+
+.alarm {
+	display: none;
+	width: 450px;
+	height: 500px;
+	position: absolute;
+	top: 50px;
+	right: -50px;
+	padding: 25px 5px;
+	z-index: 3;
+	background-color: ghostwhite;
+	box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.3);
+	/* 그림자 효과 추가 */
+	border-radius: 15px;
+	overflow: auto;
+	cursor: default;
+}
+
+.alarm::before {
+	background-color: ghostwhite;
+	box-shadow: -2px 2px 2px 0 rgba(0, 0, 0, 0.3);
+	content: "\00a0";
+	display: block;
+	height: 20px;
+	top: -10px;
+	right: 65px;
+	position: absolute;
+	transform: rotate(135deg);
+	width: 20px;
+}
+
+.innerAlarm {
+	width: 90%;
+	height: min-content;
+	margin: 0 auto 10px;
+	padding: 18px;
+	box-sizing: border-box;
+	border: 1px solid gray;
+	border-radius: 30px;
+	z-index: 2;
+	position: relative;
+}
+
+.delete {
+	border: solid 1px;
+	position: absolute;
+	right: 30px;
+}
+.delete:hover {
+	font-weight: bolder;
+}
+
+.agent-date {
+	display: flex;
+}
+
+.tab {
+	display: flex;
+	padding-left: 5px;
+}
+
+.innerAlarm p {
+	margin: 0;
+	font-size: 15px;
+	text-align: start;		
+}
+.innerAlarm .agent-date img {
+	width: 20px;
+	height: 20px;
+	padding-right: 10px;
+}
+.innerAlarm .dot {
+	padding: 0 3px; 
+}
+.innerAlarm .alarm-date {
+	font-size: 14px;
+	color: gray;
+}
+
+.agent-date .alarm-agent, .dot, .alarm-date {
+	font-weight: bolder;
+}
+
+.desc-img {
+	width: auto;
+	display: flex;
+	height: 70px;
+	padding-top: 10px;
+	cursor: pointer;
+	justify-content: space-between;
+}
+
+.desc-img .title {
+	font-weight: bolder;
+}
+
+.desc-img .desc-div {
+	width: 75%;
+	height: 90px;
+}
+
+.desc-img .img {
+	width: 25%;
+	height: 90px;
+	padding-left: 10px;
+}
+.desc-img .img img {
+	width: 100%;
+	height: 100%;
+}
+
+.logo{
+	width: 80px;
+	position: absolute;
+	transform: translate(-25%, -50%);
+}
+
+.alarm-ul {
+	font-size: 14px;
+	line-height: 1.25em;
+	-webkit-text-size-adjust: none;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	background-color: #ffffff;
+	border-top: 2px solid;
+}
+
+.alarm-ul .alarm-li {
+	-webkit-text-size-adjust: none;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	font-size: 15px;
+	line-height: 19px;
+	box-shadow: inset 0 -1px 0 0 #e9e9e9;
+}
+
+.alarm-ul .alarm-li .alarm-container {
+	font-family: -apple-system, BlinkMacSystemFont, helvetica, AppleSDGothicNeo, sans-serif;
+	-webkit-text-size-adjust: none;
+	list-style: none;
+	font-size: 15px;
+	line-height: 19px;
+	position: relative;
+	padding: 20px 18px 20px;
+}
+
+.alarm-ul .alarm-li .alarm-container .alarm-detail {
+	font-family: -apple-system, BlinkMacSystemFont, helvetica, AppleSDGothicNeo, sans-serif;
+	-webkit-text-size-adjust: none;
+	list-style: none;
+	font-size: 15px;
+	line-height: 19px;
+	margin: 0;
+	padding: 0;
+	color: #222222;
+	word-wrap: break-word;
+	word-break: break-all;
+}
+
+.alarm-ul .alarm-li .alarm-container > div {
+	font-family: -apple-system, BlinkMacSystemFont, helvetica, AppleSDGothicNeo, sans-serif;
+	-webkit-text-size-adjust: none;
+	list-style: none;
+	line-height: 19px;
+	margin-top: 13px;
+	font-size: 13px;
+	color: #999999;
+}
+
+.alarm-ul .alarm-li .alarm-container .alarm-span {
+	font-family: -apple-system, BlinkMacSystemFont, helvetica, AppleSDGothicNeo, sans-serif;
+	-webkit-text-size-adjust: none;
+	list-style: none;
+	line-height: 19px;
+	font-size: 13px;
+	color: #999999;
+	position: relative;
+	margin-left: 6px;
+	padding-left: 9px;
+}
+
+.alarm-ul .alarm-li .alarm-container .alarm-span::before {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: 1px;
+	height: 9px;
+	margin-top: -5px;
+	background-color: #e8e8e8;
+	content: "";
+}
+
+.page-num-btn-container {
+	display: inline;
+}
+
+.previous-btn,
+.next-btn,
+.page-num-btn {
+	display: inline;
+	padding: 0px 14px;
+	border: 1px solid #dddddd;
+	line-height: 38px;
+	text-decoration: none;
+	background-color: white;
+	border-left-width: 0;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16), 0 1px 2px rgba(0, 0, 0, 0.23);
+	cursor: pointer;
+}
+
+.previous-btn-disabled,
+.next-btn-disabled {
+	display: inline;
+	padding: 0px 14px;
+	border: 1px solid #dddddd;
+	line-height: 38px;
+	text-decoration: none;
+	background-color: lightgray;
+	color: gray;
+	cursor: not-allowed;
+	border-left-width: 0;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16), 0 1px 2px rgba(0, 0, 0, 0.23);
+}
+
+.previous-btn:hover,
+.next-btn:hover,
+.page-num-btn:hover {
+	font-weight: 800;
+	background-color: teal;
+	color: ghostwhite;
+}
+
+.page-num-btn-selected {
+	background-color: teal;
+	color: ghostwhite;
+}
+
+.text-wrap {
+	display: block; 
+	overflow:hidden; 
+	text-overflow:ellipsis; 
+	white-space: nowrap;
+}

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<div th:replace="html/fragment/header.html :: f-header"></div>
+	<link rel="stylesheet" href="/css/confirm.css">
+</head>
+
+<body>
+	<div id="wrapper">
+		<div id="preloader">
+			<div id="status">&nbsp;</div>
+		</div>
+	
+		<div th:replace="html/fragment/nav.html :: f-nav"></div>
+	
+		<div class="page-head">
+			<div class="container">
+				<div class="row">
+					<div class="page-head-content">
+						<h1 class="page-title">공인중개사 회원가입 신청 목록</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<div class="content-area recent-property" style="background-color: #FCFCFC; padding-bottom: 113px;">
+			<div class="container">
+				<br>
+				<div class="row row-feat">
+					<div class="col-sm-12">
+						<div class="signUpSet">
+							<div class="title" style="display: inline-flex;">
+								<div class="status">
+									<span><b>상태</b></span>
+								</div>
+								<div class="who">
+									<span><b>내용</b></span>
+								</div>
+								<div class="date">
+									<span class="writter"><b>작성일</b></span>
+								</div>
+							</div>
+						</div>
+						<div class="panel-group" id="signUpList"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="position: relative; transform: translateY(-100%);">
+		<div th:replace="html/fragment/footer.html :: f-footer"></div>
+	</div>
+
+
+	<script>
+		const pageSize = 10;
+		const blockSize = 5;
+
+		function truncateText(text, maxWidth) {
+			if (text.length > maxWidth) {
+				return text.slice(0, maxWidth) + '...';
+			}
+			return text;
+		}
+
+		function getQuestionMaxWidth() {
+			const questionElement = document.querySelector('.who');
+			return questionElement.offsetWidth / 17;
+		}
+
+		async function getRealtorSignupList(event, page) {
+			if (!page) {
+				page = 1;
+			}
+			const res = await fetch(`/realtor-sign-up?currentPage=${page}&pageSize=${pageSize}`);
+			const signUpList = await res.json();
+
+			let html = '';
+
+			for (const signUp of signUpList.list) {
+
+				let signtext = `${signUp.realtorOfficeName} ${signUp.realtorName}의 회원가입 신청`;
+
+				html += `<div class="signUpSet">`;
+				html += `	<div class="list" style="display: inline-flex;">`;
+				if (signUp.realtorSignupStatus === '확인중') {
+					html += `	<div class="status">`;
+					html += `		<span style="color: green; font-weight:600">${signUp.realtorSignupStatus}</span>`;
+					html += `	</div>`;
+				} else if (signUp.realtorSignupStatus === '승인') {
+					html += `	<div class="status">`;
+					html += `		<span style="color: blue; font-weight:600">${signUp.realtorSignupStatus}</span>`;
+					html += `	</div>`;
+				} else if (signUp.realtorSignupStatus === '거부') {
+					html += `	<div class="status">`;
+					html += `		<span style="color: red; font-weight:600">${signUp.realtorSignupStatus}</span>`;
+					html += `	</div>`;
+				}
+				html += `		<div class="who">`;
+				html += `			<span onclick="location.href='/html/admin/agent-detail?signUp=${signUp.realtorSignupNum}'">${truncateText(signtext, getQuestionMaxWidth())}</span>`;
+				html += `		</div>`;
+				html += `		<div class="date">`;
+				html += `			<span>${signUp.realtorSignupCredat}</span>`;
+				html += `		</div>`;
+				html += `	</div>`;
+				html += `</div>`;
+			}
+
+			document.querySelector('#signUpList').innerHTML = html;
+
+			const pageBlock = signUpList.pages;
+			const startBlock = Math.ceil((page / blockSize) - 1) * blockSize + 1;
+			let endBlock = startBlock + blockSize - 1;
+			let pageHtml = '';
+
+			if (endBlock > pageBlock) {
+				endBlock = pageBlock;
+			}
+
+			pageHtml += '<div class="pagination" style="text-align: center; display: block">';
+			pageHtml += '	<ul>';
+			
+			if(signUpList.isFirstPage) {
+				pageHtml += '<span class="previous-btn-disabled">이전</span>';
+			} else {
+				pageHtml += '<span class="previous-btn">이전</span>';
+			}
+			for (let i = startBlock; i <= endBlock; i++) {
+				pageHtml += `<li class="page-num-btn-container">`;
+				pageHtml += `	<span class="page-num-btn" data-pnum="${i}">${i}</span>`;
+				pageHtml += `</li>`;
+			}
+			if(signUpList.isLastPage) {
+				pageHtml += '<span class="next-btn-disabled">다음</span>';
+			} else {
+				pageHtml += '<span class="next-btn">다음</span>';
+			}
+			pageHtml += '	</ul>';
+			pageHtml += '</div>';
+
+			document.querySelector('#signUpList').innerHTML += pageHtml;
+
+			const preButton = document.querySelector('.previous-btn');
+			const nextButton = document.querySelector('.next-btn');
+
+			if(preButton){
+				preButton.addEventListener('click', function(){
+					if(signUpList.isFirstPage) {
+						return;
+					}
+					getRealtorSignupList(event, signUpList.prePage);
+				})
+			}
+
+			if(nextButton){
+				nextButton.addEventListener('click', function(){
+					if(signUpList.isLastPage) {
+						return;
+					}
+					getRealtorSignupList(event, signUpList.nextPage);
+				})
+			}
+
+			document.querySelectorAll('.page-num-btn').forEach(function(btn){
+				btn.addEventListener('click', function(){
+					getRealtorSignupList(event, btn.dataset.pnum);
+				});
+				if(btn.dataset.pnum === `${signUpList.pageNum}`){
+					btn.classList.add('page-num-btn-selected');
+				}
+			});
+		}
+
+		window.addEventListener('load', getRealtorSignupList);
+	</script>
+</body>
+
+</html>

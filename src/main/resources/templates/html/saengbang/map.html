@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<link rel="stylesheet" th:href="@{/css/map.css}">
+	<script
+		th:src="@{'//dapi.kakao.com/v2/maps/sdk.js?'+'appkey='+${@environment.getProperty('kakao.appKey')}}+'&libraries=services,clusterer,drawing'"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<div th:replace="html/fragment/header.html :: f-header"></div>
+</head>
+
+<body>
+	<div th:replace="html/fragment/nav.html :: f-nav"></div>
+	<div id="preloader">
+		<div id="status">&nbsp;</div>
+	</div>
+	<!-- End of header bar -->
+	<div class="properties-area recent-property" style="background-color: #FFF;">
+		<div class="listAndSearch">
+			<div class="filterSearch">
+				<span id="roomListCount">지역 목록 몇개</span>
+				<button class="close" id="room-close" style="position: absolute; right: 35px;">X</button>
+			</div>
+			<div class="lists">
+				<ul class="list" id="saleList" style="padding: 0; margin: 0;">
+
+				</ul>
+				<div class="pagination" style="text-align: center; display: block">
+					<ul>
+						<span class="previous-btn">이전</span>
+						<li class="page-num-btn-container"></li>
+						<span class="next-btn">다음</span>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="filterAndMap">
+			<!-- pc 필터 -->
+			<div class="filterBar">
+				<input type="button" class="roomFilter" id="rType" style="margin-left: 20px;" value="매물 종류">
+				<div class="roomContent" style="left: 20px; margin-top: 5px;">
+					<div class="filterDesc">
+						<h1>방 종류</h1>
+						<p>중복 선택 가능</p>
+					</div>
+					<div class="roomType">
+						<label>
+							<input type="checkbox" value="원룸" class="sale-type-check" id="room-one" checked>
+							<label for="room-one"></label>
+							<label style="margin-left: 10px;">원룸</label>
+						</label>
+						<label style="margin: 15px 0 0;">
+							<input type="checkbox" value="투룸" class="sale-type-check" id="room-two" checked>
+							<label for="room-two"></label>
+							<label style="margin-left: 10px;">투룸</label>
+						</label>
+						<label style="margin: 15px 0 0;">
+							<input type="checkbox" value="쓰리룸" class="sale-type-check" id="room-three" checked>
+							<label for="room-three"></label>
+							<label style="margin-left: 10px;">쓰리룸</label>
+						</label>
+						<label style="margin: 15px 0 0;">
+							<input type="checkbox" value="오피스텔" class="sale-type-check" id="office" checked>
+							<label for="office"></label>
+							<label style="margin-left: 10px;">오피스텔</label>
+						</label>
+						<label style="margin: 15px 0 0;">
+							<input type="checkbox" value="아파트" class="sale-type-check" id="apart" checked>
+							<label for="apart"></label>
+							<label style="margin-left: 10px;">아파트</label>
+						</label>
+					</div>
+					<div class="caution" style="margin: 16px 0 0;">
+						<p style="text-align: center; margin: 0; font-size: 15px;">주의 사항(없어도 될듯)</p>
+					</div>
+				</div>
+				</input>
+				<input type="button" class="roomFilter" id="sType" value="월세, 전세, 매매">
+				<div class="roomContent" style="left: 215px; margin-top: 5px;">
+					<div class="filterDesc">
+						<h1>거래 유형</h1>
+						<p>중복 선택 가능</p>
+					</div>
+					<div class="saleType">
+						<label>
+							<input type="checkbox" value="월세" class="sale-type-check" id="monthly" checked>
+							<label for="monthly"></label>
+							<label style="margin-left: 10px;">월세</label>
+						</label>
+						<label style="margin: 15px 0 0;">
+							<input type="checkbox" value="전세" class="sale-type-check" id="charter" checked>
+							<label for="charter"></label>
+							<label style="margin-left: 10px;">전세</label>
+						</label>
+						<label style="margin: 15px 0 0;">
+							<input type="checkbox" value="매매" class="sale-type-check" id="trading" checked>
+							<label for="trading"></label>
+							<label style="margin-left: 10px;">매매</label>
+						</label>
+					</div>
+				</div>
+				</input>
+				<input type="button" class="roomFilter" style="width: 70px;" value="면적">
+				<div class="roomContent" style="left: 130px; margin-top: 5px; width: 460px;">
+					<div class="filterDesc">
+						<h1>방 크기</h1>
+						<p>원하는 넓이로 설정하세요</p>
+					</div>
+					<div class="roomSize">
+						<div class="section" id="inputSizeDiv">
+							<label>최소</label>
+							<input type="number" id="minRoomSpaceMeter" style="border: 1px solid black; margin-left: 2px;" placeholder="숫자를 입력해주세요" max="150">
+							<span class="unit" style="margin-left: 2px;">㎡</span>
+							<span style="margin: 0 5px 0 5px;"> ~ </span>
+							<label>최대</label>
+							<input type="number" id="maxRoomSpaceMeter" style="border: 1px solid black; margin-left: 2px;" placeholder="숫자를 입력해주세요" max="150">
+							<span class="unit" style="margin-left: 2px;">㎡</span>
+						</div>
+						<div class="section" id="pyeongSizeDiv">
+							<label>최소</label>
+							<input type="number" id="minRoomPyeong" style="border: 1px solid black; margin-left: 2px; outline: none;" readonly><span class="unit" style="margin-left: 2px;">평</span>
+							<span style="margin: 0 5px 0 5px;"> ~ </span>
+							<label>최대</label>
+							<input type="number" id="maxRoomPyeong" style="border: 1px solid black; margin-left: 2px; outline: none;" readonly><span class="unit" style="margin-left: 2px;">평</span>
+						</div>
+					</div>
+					<div class="caution" style="margin: 16px 0 0;">
+						<p style="text-align: center; margin: 0; font-size: 15px;">㎡ 또는 평 기입란에 숫자를 적어 원하는 면적을 검색하세요.</p>
+					</div>
+				</div>
+				</input>
+				<input type="button" class="filterReset" value="초기화" onclick="resetFilter()"></input>
+
+				<!-- 모달 뜨게 하는 버튼, 클래스에  filter-modal-btn 넣은거는 이게 클래스명이 btn btn-primary로 되어 있었는데 그러면 모달창 켰다 끄면 active상태? 디자인으로 있어서 그거 없애려고 쓴 코드
+				<button type="button" class="filter-modal-btn" style="margin-bottom: 1rem;" data-toggle="modal"
+					data-target="#staticBackdrop">
+					<img th:src="@{/imgs/filter.png}" width="30px" height="30px">
+				</button> -->
+
+				<div class="searchBar">
+					<div class="search-form wow pulse form-inline-fixed" style="display: flex;">
+						<div class="form-group">
+							<input id="mapSearchBar" type="text" class="form-control" placeholder="지역명을 입력하세요">
+							<button id="searchBtn" onclick="enter()">
+								<img th:src="@{/imgs/search.png}" width="30px" height="30px">
+							</button>
+						</div>
+						<button class="btn btn-warning" id="filter-on" style="width: 40px; height: 40px;"
+							data-toggle="modal" data-target="#staticBackdrop">
+							<!-- <img th:src="@{/imgs/filter.png}" width="30px" height="30px"> -->
+							<b>필터</b>
+						</button>
+						<button class="btn btn-warning" id="list-up">
+							<!-- <img th:src="@{/imgs/list.png}" width="30px" height="30px"> -->
+							<b>목록</b>
+						</button>
+					</div>
+				</div>
+				<ul id="mapPlacesList" class="list-group" style="height: 400px; margin-bottom: -15px; position: absolute; z-index: 3; overflow-y: scroll;"></ul>
+			</div>
+			<div class="map_wrap">
+				<div id="kMap" style="width: 100%; height: 90vh;"></div>
+				<div id="menu_wrap" class="bg_white">
+					<div class="option">
+						<div class="option-search">
+							<form onsubmit="searchPlaces(); return false;" class="searchPlaces">
+								키워드 : <input type="text" style="border: 1px solid;" placeholder="키워드로 장소 검색" id="keyword" size="15">
+								<button type="submit">검색하기</button>
+							</form>
+						</div>
+					</div>
+					<div class="placeResult">
+						<hr>
+						<ul id="placesList"></ul>
+						<div id="pagination"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 모달 -->
+	<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2 class="modal-title" id="staticBackdropLabel">필터</h2>
+				</div>
+				<div class="modal-body">
+					<!-- 일단 임시로 해놓은거라 디자인이 조금 들쑥날쑥함 -->
+					<div class="room-type" style="border-bottom: 1px solid lightgray;">
+						<h1>방 종류</h1>
+						<label class="boxes">
+							<input type="checkbox" value="원룸" class="sale-type-check" id="room-one" checked>
+							<label for="room-one"></label>
+							<label style="margin: 0 5px 0 5px;">원룸</label>
+						</label>
+						<label class="boxes" style="margin: 15px 0 0;">
+							<input type="checkbox" value="투룸" class="sale-type-check" id="room-two" checked>
+							<label for="room-two"></label>
+							<label style="margin: 0 5px 0 5px;">투룸</label>
+						</label>
+						<label class="boxes" style="margin: 15px 0 0;">
+							<input type="checkbox" value="쓰리룸" class="sale-type-check" id="room-three" checked>
+							<label for="room-three"></label>
+							<label style="margin: 0 5px 0 5px;">쓰리룸</label>
+						</label>
+						<label class="boxes" style="margin: 15px 0 0;">
+							<input type="checkbox" value="오피스텔" class="sale-type-check" id="office" checked>
+							<label for="office"></label>
+							<label style="margin: 0 5px 0 5px;">오피스텔</label>
+						</label>
+						<label class="boxes" style="margin: 15px 0 0;">
+							<input type="checkbox" value="아파트" class="sale-type-check" id="apart" checked>
+							<label for="apart"></label>
+							<label style="margin: 0 5px 0 5px;">아파트</label>
+						</label>
+					</div>
+					<div class="sale-type" style="border-bottom: 1px solid lightgray;">
+						<h1>거래 유형</h1>
+						<label class="boxes">
+							<input type="checkbox" value="월세" class="sale-type-check" id="monthly" checked>
+							<label for="monthly"></label>
+							<label style="margin: 0 5px 0 5px;">월세</label>
+						</label>
+						<label class="boxes" style="margin: 15px 0 0;">
+							<input type="checkbox" value="전세" class="sale-type-check" id="charter" checked>
+							<label for="charter"></label>
+							<label style="margin: 0 5px 0 5px;">전세</label>
+						</label>
+						<label class="boxes" style="margin: 15px 0 0;">
+							<input type="checkbox" value="매매" class="sale-type-check" id="trading" checked>
+							<label for="trading"></label>
+							<label style="margin: 0 5px 0 5px;">매매</label>
+						</label>
+					</div>
+					<div class="room-size">
+						<h1>방 크기</h1>
+						<div class="section" id="inputSizeDiv" style="display: flex;">
+							<label>최소</label>
+							<input type="number" id="minRoomSpaceMeter" style="width: 70px; border: 1px solid black; margin-left: 2px;" max="150">
+							<span class="unit" style="margin-left: 2px;">㎡</span>
+							<span style="margin: 0 5px 0 5px;"> ~ </span>
+							<label>최대</label>
+							<input type="number" id="maxRoomSpaceMeter" style="width: 70px; border: 1px solid black; margin-left: 2px;" max="150">
+							<span class="unit" style="margin-left: 2px;">㎡</span>
+						</div>
+						<div class="section" id="pyeongSizeDiv" style="display: flex; padding-top: 5px;">
+							<label>최소</label>
+							<input type="number" id="minRoomPyeong" style="border: 1px solid black; margin-left: 2px; outline: none; width: 70px;" readonly>
+							<span class="unit" style="margin-left: 2px;">평</span>
+							<span style="margin: 0 5px 0 5px;"> ~ </span>
+							<label>최대</label>
+							<input type="number" id="maxRoomPyeong" style="border: 1px solid black; margin-left: 2px; outline: none; width: 70px;" readonly>
+							<span class="unit" style="margin-left: 2px;">평</span>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button id="addRoomInquiryBtn" type="button" class="btn btn-primary"
+						onclick="resetFilter()">초기화</button>
+				</div>
+			</div>
+		</div>
+	</div>
+    <!-- Footer area-->
+    <div th:replace="html/fragment/common-scripts.html :: common-scripts"></div>
+	<script th:src="@{/js/map.js}"></script>
+	<script>
+		
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+	/*.section {
+		display: flex;
+		padding: 5px;
+		margin: 10px;
+		margin-bottom: 15px;
+	}
+
+	.section button {
+		width: 120px;
+		margin-left: 10px;
+		background-color:#FDC600;
+		color: #000;
+		border: none;
+		border-radius:none;
+	}
+
+	.section button:hover {
+		background-color: #FDC600;
+	}*/
+
+	/*.descriptor {
+		width: 95px;
+		font-size: 15px;
+		text-align: center;
+	}
+
+	.equal {
+		padding: 0 15px 0 7.5px;
+		font-size: 15px;
+	}**/
+
+
+
+	input {
+		width: 300px;
+		height: 44px;
+		font-size: 15px;
+		padding-left: 10px;
+		border-style: solid;
+		border-width: 1px;
+
+	}
+
+	/*.signUpBox {
+		height: auto;
+		width: 500px;
+		margin: 0 auto;
+		margin-top: 5%;
+		/* 2023-12-23 류승호가 수정 130 -> 60*/
+	/* font-size: 60px; 2023-12-23 류승호가 삭제*/
+	/*text-align: center;
+		border: 1px solid lightgray;
+	}*/
+
+	/*.area {
+		height: auto;
+		width: 400px;
+		padding: 5px;
+		margin: 0 auto;
+		margin-bottom: 10px;
+		border: 1px solid lightgray;
+		border-radius: 10px;
+	}
+
+	.address input {
+		outline: none;
+	}*/
+
+	button {
+		width: 30%;
+		height: 50px;
+		font-size: 25px;
+		font-weight: bold;
+		margin-bottom: 10px;
+		background-color: #FDC600;
+		color: #333;
+		border: none;
+		border-radius: 10px;
+	}
+
+	button:hover {
+		background-color: #FDC600;
+	}
+
+
+
+
+	.check {
+		margin: 0;
+	}

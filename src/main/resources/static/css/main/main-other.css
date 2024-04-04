@@ -1,0 +1,36 @@
+ .container {
+ 	position: absolute;
+ 	top: 50%;
+ 	left: 50%;
+ 	transform: translate(-50%, -50%);
+ 	display: flex;
+ 	justify-content: space-between;
+ 	align-items: center;
+ 	grid-gap: 30px;
+ }
+
+ .descript {
+ 	text-align: center;
+ 	border: 1px solid black;
+ 	border-radius: 10%;
+ 	cursor: pointer;
+ }
+
+ .descript:hover {
+ 	border-radius: 10%;
+ 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+ }
+
+ .descript img {
+ 	width: 100px;
+ 	height: auto;
+ 	margin: 100px;
+ }
+
+ .descript div {
+ 	display: block;
+ 	font-weight: bold;
+ 	border-top: 1px solid black;
+ 	height: 50px;
+ 	padding-top: 30px;
+ }

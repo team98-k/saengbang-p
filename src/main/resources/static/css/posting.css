@@ -1,0 +1,32 @@
+ 	.blank {
+ 		height: 180px;
+ 		margin-left: auto;
+ 		margin-right: auto;
+ 		line-height: 3;
+ 		font-size: 48px;
+ 		text-align: center;
+ 	}
+
+ 	.formArea {
+ 		height: auto;
+ 		margin: 0 auto;
+ 	}
+
+ 	.titleArea input {
+ 		height: 40px;
+ 		font-size: 18px;
+ 	}
+
+ 	.descArea {
+ 		margin-top: 30px;
+ 	}
+
+ 	.ck-editor__editable {
+ 		min-height: 500px;
+ 		max-height: 500px;
+ 	}
+
+ 	.add-notice {
+ 		float: right;
+ 		margin-top: 10px;
+ 	}

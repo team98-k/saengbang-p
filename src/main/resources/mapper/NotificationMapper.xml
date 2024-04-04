@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.secu.notification.mapper.NotificationMapper">
+	<!-- 알림 생성 -->
+	<insert id="insertNotification">
+		INSERT INTO NOTIFICATION(ROOM_INQUIRY_NUM, NOTIFICATION_MSG, NOTIFICATION_RECEIVER_TYPE, NOTIFICATION_RECEIVER_NUM, 
+		NOTIFICATION_TYPE)
+		VALUES(#{roomInquiryNum}, #{notificationMsg}, #{notificationReceiverType}, #{notificationReceiverNum}, #{notificationType})
+	</insert>
+	
+	<!-- 사용자 또는 중개사의 알림 조회 -->
+	<select id="selectNotificationList" resultType="com.project.secu.notification.vo.NotificationVO">
+		SELECT NO.NOTIFICATION_NUM, NO.ROOM_INQUIRY_NUM, NO.NOTIFICATION_STATUS, NO.NOTIFICATION_CREDAT, 
+		NO.NOTIFICATION_MSG, NO.NOTIFICATION_RECEIVER_TYPE, NO.NOTIFICATION_RECEIVER_NUM, NO.NOTIFICATION_TYPE,
+		RO.ROOM_DETAIL_ADDRESS, RE.REALTOR_OFFICE_NAME, RO.ROOM_NUM, M.MEMBER_ID
+		FROM NOTIFICATION NO
+		INNER JOIN ROOM_INQUIRY RI
+		INNER JOIN ROOM RO
+		INNER JOIN REALTOR RE
+		INNER JOIN MEMBER M
+		ON NO.ROOM_INQUIRY_NUM = RI.ROOM_INQUIRY_NUM
+		AND RI.ROOM_NUM = RO.ROOM_NUM
+		AND RO.REALTOR_NUM = RE.REALTOR_NUM
+		AND RI.MEMBER_NUM = M.MEMBER_NUM
+		WHERE NOTIFICATION_RECEIVER_TYPE = #{notificationReceiverType}
+		AND NOTIFICATION_RECEIVER_NUM = #{notificationReceiverNum}
+		ORDER BY NOTIFICATION_NUM DESC
+	</select>
+
+	<select id="isReadNotification" resultType="com.project.secu.notification.vo.NotificationVO">
+		SELECT NO.NOTIFICATION_NUM, NO.NOTIFICATION_STATUS
+		FROM NOTIFICATION NO
+		INNER JOIN ROOM_INQUIRY RI
+		INNER JOIN ROOM RO
+		INNER JOIN REALTOR RE
+		INNER JOIN MEMBER M
+		ON NO.ROOM_INQUIRY_NUM = RI.ROOM_INQUIRY_NUM
+		AND RI.ROOM_NUM = RO.ROOM_NUM
+		AND RO.REALTOR_NUM = RE.REALTOR_NUM
+		AND RI.MEMBER_NUM = M.MEMBER_NUM
+		WHERE NOTIFICATION_RECEIVER_TYPE = #{notificationReceiverType}
+		AND NOTIFICATION_RECEIVER_NUM = #{notificationReceiverNum}
+		ORDER BY NOTIFICATION_NUM DESC
+		LIMIT 10
+	</select>
+	
+	<!-- 알림 읽음 처리 -->
+	<update id="updateNotificationStatus">
+		UPDATE NOTIFICATION
+		SET NOTIFICATION_STATUS = 1
+		WHERE NOTIFICATION_NUM = #{notificationNum}
+	</update>
+	
+	<!-- 알림 삭제 -->
+	<delete id="deleteNotification">
+		DELETE FROM NOTIFICATION
+		WHERE NOTIFICATION_NUM = #{notificationNum}
+	</delete>
+</mapper>

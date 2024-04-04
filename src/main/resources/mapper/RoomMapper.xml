@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.secu.room.mapper.RoomsMapper">
+	<!-- 매물 목록, 검색(미완성) 이거 아마 안쓰는거일거임 -->
+	<select id="selectRoomList" resultType="com.project.secu.room.vo.RoomVO" >
+		SELECT RO.ROOM_NUM, RO.ROOM_TRADE_TYPE, RO.ROOM_DEPOSIT, RO.ROOM_PRICE, 
+		RO.ROOM_FLOOR, RO.ROOM_BUILDING_FLOOR, RO.ROOM_SPACE_METER, RO.ROOM_DETAIL_TITLE, 
+		RO.ROOM_STATUS, RO.ROOM_ROAD_ADDRESS, RO.ROOM_JIBUN_ADDRESS, RO.ROOM_LATITUDE,
+		RO.ROOM_LONGITUDE, RO.ROOM_TYPE, RO.ROOM_MAINTENANCE_COST
+		FROM ROOM RO
+		INNER JOIN REALTOR RE
+		ON RO.REALTOR_NUM = RE.REALTOR_NUM
+		<where>
+			<!-- 공인 중개사 사무실명으로 매물 검색 -->
+        	<if test='realtorOfficeName != null and realtorOfficeName != ""'>
+        		AND RE.REALTOR_OFFICE_NAME LIKE CONCAT('%', #{realtorOfficeName}, '%')
+        	</if>
+        	<!-- 도로명주소로 매물 검색 -->
+        	<if test='roomRoadAddress != null and roomRoadAddress != ""'>
+        		AND RO.ROOM_ROAD_ADDRESS LIKE CONCAT('%', #{roomRoadAddress}, '%')
+        	</if>
+        	<!-- 지번주소로 매물 검색 -->
+        	<if test='roomJibunAddress != null and roomJibunAddress != ""'>
+        		AND RO.ROOM_JIBUN_ADDRESS LIKE CONCAT('%', #{roomJibunAddress}, '%')
+        	</if>
+        </where>
+	</select>
+	
+	<!-- 지도 내 매물 목록 -->
+	<select id="selectMapRoomList" resultType="com.project.secu.room.vo.RoomVO">
+		SELECT RO.ROOM_NUM, RO.ROOM_TRADE_TYPE, RO.ROOM_DEPOSIT, RO.ROOM_PRICE, 
+		RO.ROOM_FLOOR, RO.ROOM_BUILDING_FLOOR, RO.ROOM_SPACE_METER, RO.ROOM_DETAIL_TITLE, 
+		RO.ROOM_STATUS, RO.ROOM_ROAD_ADDRESS, RO.ROOM_JIBUN_ADDRESS, RO.ROOM_LATITUDE,
+		RO.ROOM_LONGITUDE, RO.ROOM_TYPE, RO.ROOM_MAINTENANCE_COST, RI.ROOM_IMG_PATH
+		FROM ROOM RO
+		INNER JOIN ROOM_IMG RI
+		ON RO.ROOM_NUM = RI.ROOM_NUM
+		<where>
+			RI.ROOM_IMG_SEQUENCE = 1 AND RO.ROOM_STATUS ='판매중'
+			<!-- 좌표로 매물 검색 -->
+			<if test='roomSouthCoord != null and roomSouthCoord != "" and roomNorthCoord != null and roomNorthCoord != "" and roomWestCoord != null and roomWestCoord != "" and roomEastCoord != null and roomEastCoord != ""'>
+				AND RO.ROOM_LATITUDE BETWEEN #{roomSouthCoord} AND #{roomNorthCoord}
+				AND RO.ROOM_LONGITUDE BETWEEN #{roomWestCoord} AND #{roomEastCoord}
+			</if>
+			<!-- 방 종류로 매물 검색 -->
+			<if test='roomTypeFilterList != null'>
+				AND RO.ROOM_TYPE IN <foreach collection="roomTypeFilterList" item="roomType" separator="," open="(" close=")">#{roomType}</foreach>
+			</if>
+			<!-- 거래 유형으로 매물 검색 -->
+			<if test='roomTradeTypeFilterList != null'>
+				AND RO.ROOM_TRADE_TYPE IN <foreach collection="roomTradeTypeFilterList" item="roomTradeType" separator="," open="(" close=")">#{roomTradeType}</foreach>
+			</if>
+			<!-- 면적 범위로 매물 검색 -->
+			<if test='minRoomSpaceMeter != null and minRoomSpaceMeter != "" and maxRoomSpaceMeter != null and maxRoomSpaceMeter != ""'>
+				AND RO.ROOM_SPACE_METER BETWEEN #{minRoomSpaceMeter} AND #{maxRoomSpaceMeter}
+			</if>
+		</where>
+		ORDER BY RO.ROOM_NUM DESC
+	</select>
+	
+	<!-- 매물 상세 정보 -->
+	<select id="selectRoom" resultType="com.project.secu.room.vo.RoomVO">
+		SELECT RO.ROOM_NUM, RO.REALTOR_NUM, RE.REALTOR_NAME, RE.REALTOR_OFFICE_NAME, 
+		RE.REALTOR_REGISTRATION_NUM, RE.REALTOR_PHONE, RO.ROOM_TRADE_TYPE, RO.ROOM_DEPOSIT, 
+		RO.ROOM_PRICE, RO.ROOM_MAINTENANCE_COST, RO.ROOM_PARKING, RO.ROOM_DETAIL_ADDRESS, 
+		RO.ROOM_TYPE, RO.ROOM_FLOOR, RO.ROOM_BUILDING_FLOOR, RO.ROOM_SPACE_METER,
+		RO.ROOM_BEDS_NUM, RO.ROOM_BATH_NUM, RO.ROOM_DIRECTION, RO.ROOM_HEATING,
+		RO.ROOM_ELEVATOR, RO.ROOM_HOUSEHOLD_NUM, RO.ROOM_PARKING_NUM, RO.ROOM_ENTRANCE_TYPE,
+		RO.ROOM_MOVING_DATE, RO.ROOM_BUILDING_USE_TYPE, RO.ROOM_CREDAT, RO.ROOM_ROAD_ADDRESS,
+		RO.ROOM_JIBUN_ADDRESS, RO.ROOM_DETAIL_TITLE, RO.ROOM_DETAIL, RO.ROOM_STATUS,
+		RE.REALTOR_OFFICE_ADDRESS, RE.REALTOR_OFFICE_DETAIL_ADDRESS, RE.REALTOR_IMG_PATH
+		FROM ROOM RO
+		INNER JOIN REALTOR RE
+		ON RO.REALTOR_NUM = RE.REALTOR_NUM
+		WHERE RO.ROOM_NUM = #{roomNum}
+	</select>
+
+	<select id="selectRoomsRank" resultType="com.project.secu.room.vo.RoomVO">
+		SELECT DISTINCT R.*, RI.ROOM_IMG_PATH,
+		DENSE_RANK() OVER (ORDER BY COUNT(F.ROOM_NUM) DESC) AS rank
+		FROM ROOM R
+		INNER JOIN ROOM_IMG RI ON R.ROOM_NUM = RI.ROOM_NUM
+		INNER JOIN FAVORITE F ON F.ROOM_NUM = R.ROOM_NUM
+		WHERE R.ROOM_STATUS != '거래완료'
+		AND RI.ROOM_IMG_SEQUENCE = 1
+		GROUP BY R.ROOM_NUM
+		ORDER BY rank
+		LIMIT 4
+	</select>
+	
+	<!-- 매물 등록 -->
+	<insert id="insertRoom" useGeneratedKeys="true" keyColumn="ROOM_NUM" keyProperty="roomNum">
+		INSERT INTO ROOM(REALTOR_NUM, ROOM_TRADE_TYPE, ROOM_DEPOSIT, ROOM_PRICE, 
+		ROOM_MAINTENANCE_COST, ROOM_PARKING, ROOM_DETAIL_ADDRESS, ROOM_TYPE, 
+		ROOM_FLOOR, ROOM_BUILDING_FLOOR, ROOM_SPACE_METER, ROOM_BEDS_NUM, 
+		ROOM_BATH_NUM, ROOM_DIRECTION, ROOM_HEATING, ROOM_ELEVATOR, 
+		ROOM_HOUSEHOLD_NUM, ROOM_PARKING_NUM, ROOM_ENTRANCE_TYPE, ROOM_MOVING_DATE, 
+		ROOM_BUILDING_USE_TYPE, ROOM_ROAD_ADDRESS, ROOM_JIBUN_ADDRESS, 
+		ROOM_DETAIL_TITLE, ROOM_DETAIL, ROOM_LATITUDE, ROOM_LONGITUDE)
+		VALUES(#{realtorNum}, #{roomTradeType}, #{roomDeposit}, #{roomPrice}, 
+		#{roomMaintenanceCost}, #{roomParking}, #{roomDetailAddress}, 
+		#{roomType}, #{roomFloor}, #{roomBuildingFloor}, #{roomSpaceMeter}, 
+		#{roomBedsNum}, #{roomBathNum}, #{roomDirection}, #{roomHeating}, 
+		#{roomElevator}, #{roomHouseholdNum}, #{roomParkingNum}, #{roomEntranceType}, 
+		#{roomMovingDate}, #{roomBuildingUseType}, #{roomRoadAddress}, #{roomJibunAddress}, 
+		#{roomDetailTitle}, #{roomDetail}, #{roomLatitude}, #{roomLongitude})
+	</insert>
+	
+	<!-- 매물 정보 수정 -->
+	<update id="updateRoom">
+		UPDATE ROOM
+		SET ROOM_TRADE_TYPE = #{roomTradeType}, ROOM_DEPOSIT = #{roomDeposit}, ROOM_PRICE = #{roomPrice}, ROOM_MAINTENANCE_COST = #{roomMaintenanceCost},
+		ROOM_PARKING = #{roomParking}, ROOM_DETAIL_ADDRESS = #{roomDetailAddress}, ROOM_TYPE = #{roomType}, ROOM_FLOOR = #{roomFloor},
+		ROOM_BUILDING_FLOOR = #{roomBuildingFloor}, ROOM_SPACE_METER = #{roomSpaceMeter}, ROOM_BEDS_NUM = #{roomBedsNum}, ROOM_BATH_NUM = #{roomBathNum},
+		ROOM_DIRECTION = #{roomDirection}, ROOM_HEATING = #{roomHeating}, ROOM_ELEVATOR = #{roomElevator}, ROOM_HOUSEHOLD_NUM = #{roomHouseholdNum},
+		ROOM_PARKING_NUM = #{roomParkingNum}, ROOM_ENTRANCE_TYPE = #{roomEntranceType}, ROOM_MOVING_DATE = #{roomMovingDate}, ROOM_BUILDING_USE_TYPE = #{roomBuildingUseType},
+		ROOM_ROAD_ADDRESS = #{roomRoadAddress}, ROOM_JIBUN_ADDRESS = #{roomJibunAddress}, ROOM_DETAIL_TITLE = #{roomDetailTitle}, ROOM_DETAIL = #{roomDetail}
+		WHERE ROOM_NUM = #{roomNum}
+	</update>
+	
+	<!-- 해당 매물의 중개사무소의 다른 매물 -->
+	<select id="selectRealtorRoomList" resultType="com.project.secu.room.vo.RoomVO">
+		SELECT RO.ROOM_NUM, RO.ROOM_TRADE_TYPE, RO.ROOM_DEPOSIT, RO.ROOM_PRICE, 
+		RO.ROOM_FLOOR, RO.ROOM_BUILDING_FLOOR, RO.ROOM_SPACE_METER, RO.ROOM_DETAIL_TITLE,
+		RO.ROOM_TYPE, RO.ROOM_DETAIL_TITLE, RO.ROOM_BATH_NUM, RO.ROOM_BEDS_NUM,
+		RO.ROOM_ROAD_ADDRESS, RO.ROOM_JIBUN_ADDRESS, RO.ROOM_STATUS, RI.ROOM_IMG_PATH
+		FROM ROOM RO
+		INNER JOIN ROOM_IMG RI
+		ON RO.ROOM_NUM = RI.ROOM_NUM
+		WHERE RO.REALTOR_NUM = #{realtorNum}
+		AND RI.ROOM_IMG_SEQUENCE = 1
+		ORDER BY RO.ROOM_NUM DESC
+	</select>
+	
+	<!-- 매물 판매 완료 -->
+	<update id="updateRoomStatus">
+		UPDATE ROOM
+		SET ROOM_STATUS = '거래완료'
+		WHERE ROOM_NUM = #{roomNum}
+	</update>
+	
+	<!-- 매물 삭제 -->
+	<delete id="deleteRoom">
+		DELETE FROM ROOM
+		WHERE ROOM_NUM = #{roomNum}
+	</delete>
+	
+	<!-- 특정 매물을 올린 중개사 번호 조회 -->
+	<select id="selectRoomRealtorNum" resultType="int">
+		SELECT REALTOR_NUM FROM ROOM
+		WHERE ROOM_NUM = #{roomNum}
+	</select>
+</mapper>

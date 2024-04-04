@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+
+<head>
+	<div th:replace="html/fragment/header.html :: f-header"></div>
+	<link rel="stylesheet" th:href="@{/css/recently.css}">
+</head>
+
+<body>
+	<div id="preloader">
+		<div id="status">&nbsp;</div>
+	</div>
+	<div th:replace="html/fragment/nav.html :: f-nav"></div>
+	<div class="content-area user-profiel">&nbsp;
+		<div class="container">
+			<div class="col-sm-10 col-sm-offset-1 profiel-container">
+				<div class="profiel-header">
+					<h3>
+						<b>부동산 정보</b>
+					</h3>
+					<hr>
+				</div>
+				<div class="clear" style="text-align: left;">
+					<div class="col-sm-5 col-sm-offset-1">
+						<div class="form-group">
+							<label>사진</label><br>
+							<img id="realtorImgView" th:src="@{/imgs/profile.png}" alt="your image"
+								style="width: 150px; height: 150px; object-fit: cover; border: 1px solid gray;">
+						</div>
+						<div class="form-group">
+							<label>이름</label>
+							<p id="realtorName"></p>
+						</div>
+						<div class="form-group">
+							<label>전화번호</label>
+							<p id="realtorPhone"></p>
+						</div>
+					</div>
+					<div class="col-sm-5">
+						<div class="form-group">
+							<label>중개사 사무소 주소 </label>
+							<p id="realtorOfficeAddress"></p>
+						</div>
+						<div class="form-group">
+							<label>중개사 사무소 이름 </label>
+							<p id="realtorOfficeName"></p>
+						</div>
+						<div class="form-group">
+							<label>공인중개사 등록 번호</label>
+							<p id="realtorRegistrationNum"></p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="row  pr0 padding-top-40 properties-page">
+				<div class="col-md-12 clear">
+					<h3 style="text-align: center;">공인중개사 매물정보</h3>
+					<hr>
+					<div id="list-type" class="proerty-th">
+						<div class="rooms" id="rooms">
+							<div class="roomList" id="list-type">
+							</div>
+							<div id="page"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12 clear">
+				<div class="pull-right">
+					<div class="pagination" id="page">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="html/fragment/footer.html :: f-footer"></div>
+	<script th:src="@{/js/agent-page-show.js}"></script>
+</body>
+
+</html>

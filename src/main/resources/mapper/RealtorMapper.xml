@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.secu.realtor.mapper.RealtorMapper">
+	<!-- 채팅에서 중개사 목록 가져올때 사용할 거 -->
+	<select id="selectRealtorInfos">
+		SELECT * FROM REALTOR
+	</select>
+	
+	<!-- 중개사 로그인 겸 회원가입 신청할 때 중개사 아이디 중복 체크 -->
+	<select id="selectRealtorByRealtorId" resultType="com.project.secu.realtor.vo.RealtorVO">
+		SELECT REALTOR_NUM, REALTOR_ID, REALTOR_PASSWORD,
+		REALTOR_NAME, REALTOR_PHONE, REALTOR_OFFICE_ADDRESS, 
+		REALTOR_OFFICE_NAME, REALTOR_REGISTRATION_NUM, REALTOR_ROLE
+		FROM REALTOR
+		WHERE REALTOR_ID = #{realtorId}
+	</select>
+	
+	<!-- 중개사 정보 조회 -->
+	<select id="selectRealtor" resultType="com.project.secu.realtor.vo.RealtorVO">
+		SELECT REALTOR_NUM, REALTOR_ID, REALTOR_NAME, REALTOR_PHONE, 
+		REALTOR_OFFICE_ADDRESS, REALTOR_OFFICE_DETAIL_ADDRESS, REALTOR_OFFICE_NAME, REALTOR_REGISTRATION_NUM, 
+		REALTOR_ROLE, REALTOR_IMG_PATH
+		FROM REALTOR
+		WHERE REALTOR_NUM = #{realtorNum}
+	</select>
+	
+	<!-- 회원가입 신청할 때 중개사 등록번호 중복 체크(1이면 중복이라서 가입 신청 불가, 0이면 중복이 아니라서 가입 신청 가능 -->
+	<select id="selectRealtorRegistrationNum">
+		SELECT COUNT(*)
+		FROM REALTOR
+		WHERE REALTOR_REGISTRATION_NUM = #{realtorRegistrationNum}
+	</select>
+	
+	<!-- 가입 승인 되면 중개사 테이블에 중개사 정보 넣음 -->
+	<insert id="insertRealtor" parameterType="com.project.secu.realtor.vo.RealtorVO">
+		INSERT INTO REALTOR(REALTOR_ID, REALTOR_PASSWORD, REALTOR_NAME, REALTOR_PHONE, 
+		REALTOR_OFFICE_NAME, REALTOR_OFFICE_ADDRESS, REALTOR_OFFICE_DETAIL_ADDRESS, REALTOR_REGISTRATION_NUM,
+		REALTOR_IMG_PATH)
+		VALUES(#{realtorId}, #{realtorPassword}, #{realtorName}, #{realtorPhone}, 
+		#{realtorOfficeName}, #{realtorOfficeAddress}, #{realtorOfficeDetailAddress}, #{realtorRegistrationNum},
+		#{realtorImgPath})
+	</insert>
+	
+	<!-- 중개사 정보 수정 -->
+	<update id="updateRealtor" parameterType="com.project.secu.realtor.vo.RealtorVO">
+		UPDATE REALTOR
+		SET REALTOR_PASSWORD = #{realtorPassword}, REALTOR_PHONE = #{realtorPhone},
+		REALTOR_OFFICE_ADDRESS = #{realtorOfficeAddress}, REALTOR_OFFICE_NAME = #{realtorOfficeName},
+		REALTOR_OFFICE_DETAIL_ADDRESS = #{realtorOfficeDetailAddress}, REALTOR_IMG_PATH = #{realtorImgPath}
+		WHERE REALTOR_NUM = #{realtorNum}
+	</update>
+</mapper>

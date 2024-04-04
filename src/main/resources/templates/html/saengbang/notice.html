@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<div th:replace="html/fragment/header.html :: f-header"></div>
+	<link rel="stylesheet" th:href="@{/css/notice.css}">
+</head>
+
+<body>
+	<div style="height: auto; min-height: calc(100% - 115px);">
+		<div id="preloader">
+			<div id="status">&nbsp;</div>
+		</div>
+	
+	
+		<div th:replace="html/fragment/nav.html :: f-nav"></div>
+	
+		<div class="page-head">
+			<div class="container">
+				<div class="row">
+					<div class="page-head-content">
+						<h1 class="page-title">공지사항</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End page header -->
+	
+	
+		<!-- property area -->
+		<div class="content-area recent-property" style="background-color: #FCFCFC;">
+			<div class="container">
+				<br>
+				<div style="display: flex; justify-content: center; align-items: center;">
+					<select id="search" class="form-control" onchange="changeOption(this)" style="margin-right:10px; width: 75px;">
+						<option value="noticeTitle" selected>제목</option>
+						<option value="noticeDetail">내용</option>
+					</select>
+					<div style="width:60%; display: flex;">
+						<input type="text" class="form-control" data-id="searchInput" placeholder="검색어을 입력하세요" onkeyup="enter()">
+						<button style="width:40px; height: 50%; background-color: #ffffff; margin-left:-50px;margin-top:7px" onclick="getNoticeList()">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+								<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+							</svg>
+						</button>
+					</div>
+				</div>
+	
+				<div class="row row-feat">
+	
+					<div class="col-sm-12">
+						<div class="QnASet">
+							<div class="title" style="display: inline-flex;">
+								<div class="question">
+									<span><b>제목</b></span>
+								</div>
+								<div class="date" style="width: 120px; text-align: center;">
+									<span class="writter"><b>작성일</b></span>
+								</div>
+							</div>
+						</div>
+						<div class="panel-group" id="noticeList"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Footer area-->
+	<div th:replace="html/fragment/footer.html :: f-footer"></div>
+	<script th:src="@{/js/notice.js}"></script>
+</body>
+
+</html>

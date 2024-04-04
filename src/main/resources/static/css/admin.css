@@ -1,0 +1,31 @@
+	.blank {
+		height: 280px;
+		margin-left: auto;
+		margin-right: auto;
+		line-height: 6;
+		font-size: 60px;
+		text-align: center;
+	}
+	
+	.types {
+		width: auto;
+		height: auto;
+		margin: auto;
+		text-align: center;
+	}
+	.types ul {
+		margin: 0;
+		padding: 0;
+		width: auto;
+	}
+	.types li {
+		width: 250px;
+		height: 60px;
+		list-style: none;
+		display: inline-flex;
+		border: 1px solid lightgray;
+	}
+	.types a {
+		font-size: 30px;
+		margin: auto;
+	}

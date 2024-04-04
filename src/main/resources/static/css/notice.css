@@ -1,0 +1,165 @@
+ 	.blank {
+		height: 180px;
+		margin-left: auto;
+		margin-right: auto;
+		line-height: 3;
+		font-size: 48px;
+		text-align: center;
+	}
+
+	
+	.search {
+		text-align: center;
+		width: 100%;
+		height: 30px;
+		margin: auto;
+		padding-bottom: 20px;
+	}
+
+	.search #search {
+		width: 20%;
+		height: 30px;
+		margin: 0;
+	}
+	
+	.search input {
+		width: 55%;
+		height: 30px;
+		padding: 0 8px;
+		box-sizing: border-box;
+	}
+	
+	.search button {
+		width: 20%;
+		height: 30px;
+		margin: 0;
+		padding: 5px 10px;
+		box-sizing: border-box;
+	}
+	
+	.QnAList {
+		width: 1100px;
+		height: auto;
+		margin: auto;
+		box-sizing: border-box;
+	}
+
+	.QnAList ul {
+		padding: 15px 0 15px 15px;
+		margin: 0 15px;
+		list-style: none;
+		border-top: 2px solid;
+		box-sizing: border-box;
+	}
+
+	.QnAList li {
+		text-align: center;
+		display: inline-block;
+	}
+
+	.QnASet {
+		margin: 0 15px;
+	}
+
+	.question {
+		width: 95%;
+		padding-left: 10px;
+	}
+	
+	.date {
+		width: 100px;
+		text-align: center;
+		/*height: auto;
+		margin: 15px 0;
+		padding-left: 15px;
+		box-sizing: border-box;
+		text-align: center;*/
+	}
+
+	.que:first-child {
+		border-top: 1px solid lightgray;
+	}
+
+	.title {
+		width: 100%;
+		position: relative;
+		padding: 17px 10px;
+		text-align: center;
+		font-size: 14px;
+		box-sizing: border-box;
+	}
+
+	.que {
+		width: 100%;
+		position: relative;
+		padding: 10px 10px;
+		cursor: pointer;
+		font-size: 14px;
+		box-sizing: border-box;
+
+	}
+
+	.que::before {
+		display: inline-block;
+		font-size: 14px;
+		color: #006633;
+		margin: 0 5px;
+	}
+
+	.que.on>span {
+		font-weight: bold;
+		color: #006633;
+	}
+
+	.naeyong {
+		display: none;
+		overflow: hidden;
+		font-size: 14px;
+		padding: 25px 25px;
+		box-sizing: border-box;
+		background-color: #f4f4f2;
+	}
+
+	.naeyong::before {
+		display: inline-block;
+		font-size: 14px;
+		font-weight: bold;
+		color: #666;
+		margin: 0 5px;
+	}
+
+	.naeyong .answer {
+		padding-bottom: 10px;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	.naeyong .anw {
+		display: flex;
+		box-sizing: border-box;
+		padding: 10px 25px 0 25px;
+	}
+
+	.anwIcon {
+		margin-right: 10px;
+	}
+
+	.anw button {
+		float: right;
+	}
+
+	.add-notice {
+		float: right;
+		margin-top: 10px;
+	}
+
+	.edit {
+		padding: 10px 25px 0 25px;
+	}
+
+	.edit #edit {
+		float: right;
+	}
+	.content-area{
+    padding-top: 0px; padding-bottom: 0px;
+	}

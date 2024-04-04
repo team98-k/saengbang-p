@@ -1,0 +1,40 @@
+ .container {
+ 	position: absolute;
+ 	top: 50%;
+ 	left: 50%;
+ 	display: flex;
+ 	justify-content:center;
+ 	align-items: center;
+ 	grid-gap: 30px;
+ }
+
+ .descript {
+ 	text-align: center;
+ 	border: 1px solid gray;
+ 	border-radius: 10%;
+ 	cursor: pointer;	
+ 	display: flex;
+ 	justify-content: center;
+ }
+
+ .descript:hover {
+ 	border-radius: 10%;
+ 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+ }
+
+ .descript img {
+ 	width: 500px;
+ 	height:300px;
+ 	margin: auto;
+ 	display: block;
+
+ 	
+ }
+
+ .descript div {
+ 	display: flex;
+ 	font-weight: bold;
+ 	border-top: 1px solid gray;
+ 	height: 50px;
+ 	padding-top: 30px;
+ }

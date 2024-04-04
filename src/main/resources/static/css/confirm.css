@@ -1,0 +1,77 @@
+ 	.blank {
+		height: 180px;
+		margin-left: auto;
+		margin-right: auto;
+		line-height: 3;
+		font-size: 48px;
+		text-align: center;
+	}
+
+	.signUpSet {
+		margin: 0 15px;
+	}
+	
+	.status {
+		/*width: 15%;*/
+		width: 75px;
+		text-align: center;
+		/*height: auto;
+		margin: 15px 0;
+		padding-left: 5px;
+		text-align: center;
+		font-weight: bolder;*/
+	}
+	
+	.who {
+		width: 80%;
+		padding-left: 10px;
+		/*margin: 15px 0;
+		font-size: 18px;
+		padding-left: 30px;
+		box-sizing: border-box;*/
+	}
+	
+	.date {
+		width: 148px;
+		text-align: center;
+		/*height: auto;
+		margin: 15px 0;
+		padding-left: 15px;
+		box-sizing: border-box;
+		text-align: center;*/
+	}
+
+	.list:first-child {
+		border-top: 1px solid lightgray;
+	}
+
+	.title {
+		width: 100%;
+		position: relative;
+		padding: 17px 10px;
+		text-align: center;
+		font-size: 14px;
+		box-sizing: border-box;
+
+	}
+
+	.list {
+		width: 100%;
+		position: relative;
+		padding: 10px 10px;
+		cursor: pointer;
+		font-size: 14px;
+		box-sizing: border-box;
+	}
+
+	.list::before {
+		display: inline-block;
+		font-size: 14px;
+		color: #006633;
+		margin: 0 5px;
+	}
+
+	.list.on>span {
+		font-weight: bold;
+		color: #006633;
+	}

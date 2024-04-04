@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+
+<head>
+	<div th:replace="html/fragment/header.html :: f-header"></div>
+</head>
+
+<body>
+	<div id="wrapper">
+		<div id="preloader">
+			<div id="status">&nbsp;</div>
+		</div>
+		<div th:replace="html/fragment/nav.html :: f-nav"></div>
+
+		<!-- register-area -->
+		<div class="register-area">
+			<div class="container">
+				<div class="col-md-6" style=" top: 50%; left: 50%;transform: translate(-50%, 0%);">
+					<div class="box-for overflow">
+						<div class="col-md-12 col-xs-12 login-blocks">
+							<h2>LOGIN</h2>
+							<div class="form-group">
+								<label for="id">아이디</label>
+								<input type="text" class="form-control" id="memberId" onkeyup="enter()"
+									placeholder="아이디">
+							</div>
+							<div class="form-group">
+								<label for="password">패스워드</label>
+								<input type="password" class="form-control" id="memberPassword" onkeyup="enter()"
+									placeholder="비밀번호">
+							</div>
+							<div class="text-center">
+								<button id="loginBtn" class="btn btn-default">로그인</button>
+							</div>
+							<br>
+							<div class="signUp">
+								<p style="margin-bottom: 5px;">
+									회원이 아닌가요?
+									<br>
+									<a id="goSignUp" href="/html/saengbang/sign-up">회원가입</a>
+								</p>
+								<p>
+									공인중개사인가요?
+									<br>
+									<a id="goSignUp" href="/html/saengbang/realtor-signup-menu">
+										공인중개사 회원가입
+									</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><br>
+		</div>
+	</div>
+	<!-- 이거 얘만 조금 다르게 보여야되서 이렇게 한거니까 건드리지 말아주세요 나중에 footer.html로 옮겨서 정리 예정 -->
+	<!-- Footer area-->
+	<!-- <div class="footer-area" th:fragment="f-footer" style="position: relative; transform: translateY(-100%);">
+		<div class="footer" style="padding-bottom: 5px;">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 col-sm-6 wow fadeInRight animated">
+						<div class="single-footer" style="margin-top: 5px;">
+							<h4>About us </h4>
+							<div class="footer-title-line" style="margin: 0px 0px 5px;"></div>
+							<p style="padding-bottom: 5px;">4팀 프로젝트</p>
+							<p style="padding-bottom: 5px;">(김용준, 김정훈, 류승호, 이원기, 홍동인)</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+	<div style="position: relative; transform: translateY(-100%);">
+		<div th:replace="html/fragment/footer.html :: f-footer"></div>
+	</div>
+	<script src="/js/login.js"></script>
+
+</body>
+
+</html>

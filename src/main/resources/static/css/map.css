@@ -1,0 +1,885 @@
+.map_wrap,
+.map_wrap * {
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+}
+
+.map_wrap a,
+.map_wrap a:hover,
+.map_wrap a:active {
+	color: #000;
+	text-decoration: none;
+}
+
+.map_wrap {
+	position: relative;
+	width: 100%;
+	height: 800px;
+}
+
+#menu_wrap {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 250px;
+	height: 500px;
+	margin: 10px 0 30px 10px;
+	padding: 5px;
+	background: rgba(255, 255, 255, 0.7);
+	z-index: 1;
+	font-size: 12px;
+	border-radius: 10px;
+}
+
+.bg_white {
+	background: #fff;
+}
+
+#menu_wrap hr {
+	display: sticky;
+	height: 1px;
+	border: 0;
+	border-top: 2px solid #5F5F5F;
+	margin: 3px 0;
+}
+
+#menu_wrap .option {
+	text-align: center;
+}
+
+#menu_wrap .option p {
+	margin: 10px 0;
+}
+
+#menu_wrap .option button {
+	margin-left: 5px;
+}
+
+.searchPlaces {
+	display: flex;
+	grid-gap: 5px;
+	justify-content: center;
+}
+.searchPlaces input {
+	width: 110px;
+	border: 1px solid black;
+}
+
+.option-search {
+	top: 0;
+	position: sticky;
+}
+
+#placesList {
+	height: calc(500px - 34px);
+	overflow-y: auto;
+}
+
+#placesList li {
+	list-style: none;
+}
+
+#placesList .item {
+	position: relative;
+	border-bottom: 1px solid #888;
+	cursor: pointer;
+	padding: 5px;
+}
+
+#placesList .item span {
+	display: block;
+	margin-top: 4px;
+}
+
+#placesList .item h5,
+#placesList .item .info {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+#placesList .item .info {
+	padding: 10px 0 10px 10px;
+}
+
+#placesList .info .gray {
+	color: #8a8a8a;
+}
+
+#placesList .info .jibun {
+	padding-left: 26px;
+	background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;
+}
+
+#placesList .info .tel {
+	color: #009900;
+}
+
+#placesList .item .markerbg {
+	float: left;
+	position: absolute;
+	width: 36px;
+	height: 37px;
+	margin: 10px 0 0 10px;
+	background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;
+}
+
+#placesList .item .marker_1 {
+	background-position: 0 -10px;
+}
+
+#placesList .item .marker_2 {
+	background-position: 0 -56px;
+}
+
+#placesList .item .marker_3 {
+	background-position: 0 -102px
+}
+
+#placesList .item .marker_4 {
+	background-position: 0 -148px;
+}
+
+#placesList .item .marker_5 {
+	background-position: 0 -194px;
+}
+
+#placesList .item .marker_6 {
+	background-position: 0 -240px;
+}
+
+#placesList .item .marker_7 {
+	background-position: 0 -286px;
+}
+
+#placesList .item .marker_8 {
+	background-position: 0 -332px;
+}
+
+#placesList .item .marker_9 {
+	background-position: 0 -378px;
+}
+
+#placesList .item .marker_10 {
+	background-position: 0 -423px;
+}
+
+#placesList .item .marker_11 {
+	background-position: 0 -470px;
+}
+
+#placesList .item .marker_12 {
+	background-position: 0 -516px;
+}
+
+#placesList .item .marker_13 {
+	background-position: 0 -562px;
+}
+
+#placesList .item .marker_14 {
+	background-position: 0 -608px;
+}
+
+#placesList .item .marker_15 {
+	background-position: 0 -654px;
+}
+
+#pagination,
+#roomListPagination {
+	margin: 10px auto;
+	text-align: center;
+}
+
+#pagination a,
+#roomListPagination a {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+#pagination .on {
+	font-weight: bold;
+	cursor: default;
+	color: #777;
+}
+
+html {
+	overflow: hidden;
+}
+
+#map {
+	height: 100%;
+}
+
+.properties-area.recent-property {
+	width: 100%;
+	height: 100%;
+	display: grid;
+	grid-template-rows: auto;
+	grid-template-columns: 412px 2.5fr;
+}
+
+.filterSearch {
+	width: 412px;
+	height: 60px;
+	display: flex;
+	padding: 0 10px 0 10px;
+	border: 1px solid lightgray;
+	font-size: 14px;
+	font-weight: 700;
+	justify-content: center;
+	align-items: center;
+}
+
+#searchBar {
+	border: none;
+	height: 40px;
+	width: 250px;
+	font-size: 15px;
+	margin-top: 10px;
+}
+
+#searchBar:focus {
+	outline: none;
+}
+
+.filterBar {
+	width: 100%;
+	height: 60px;
+	display: inline-block;
+	position: relative;
+	border: 1px solid lightgray;
+	white-space: nowrap;
+}
+
+.roomFilter {
+	margin-right: 20px;
+	height: 40px;
+	width: auto;
+	background-color: white;
+	border-radius: 5px;
+	cursor: pointer;
+	border: 2px solid black;
+}
+
+.filterReset {
+	height: 40px;
+	width: auto;
+	background-color: white;
+	border-radius: 5px;
+	cursor: pointer;
+	border: 2px solid black;
+}
+.filterReset:active {
+	height: 40px;
+	width: auto;
+	background-color: white;
+	border-radius: 5px;
+	cursor: pointer;
+	border: 2px solid #FDC600;
+}
+
+.roomContent {
+	width: 300px;
+	height: 320px;
+	display: none;
+	position: absolute;
+	min-width: 160px;
+	background-color: #fff;
+	padding: 25px 30px 0;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 10;
+	border: 1px solid lightgray;
+}
+
+.roomContent label {
+	display: flex;
+	margin: 0;
+}
+
+.roomContent h1 {
+	margin: 0;
+	font-size: 18px;
+}
+
+.roomContent p {
+	margin: 4px 0;
+	font-size: 13px;
+}
+
+.roomContent label p {
+	margin: 0;
+	line-height: 2;
+	padding-left: 8px;
+}
+
+.roomType {
+	padding: 15px 5px;
+	border-bottom: 1px solid lightgray;
+}
+
+.saleType {
+	padding: 15px 5px;
+	border-bottom: 1px solid lightgray;
+}
+
+.apart {
+	padding: 15px 5px;
+	border-bottom: 1px solid lightgray;
+}
+
+/* 원래  input[class="check"] 였는데 왠지 템플릿에 있는 css랑 클래스명이 겹칠것 같아서 바꿈*/
+input[class="sale-type-check"]+label {
+	display: inline-block;
+	margin: 0px;
+	width: 28px;
+	height: 28px;
+	cursor: pointer;
+	position: relative;
+	border-radius: 5px;
+	border: 2px solid #FDC600;
+}
+
+input[class="sale-type-check"]:checked+label {
+	background-color: #FDC600;
+}
+
+input[class="sale-type-check"]:checked+label::after {
+	top: -1px;
+	left: 3.5px;
+	content: '✔';
+	color: white;
+	font-size: 20px;
+	position: absolute;
+	text-align: center;
+}
+
+input[class="sale-type-check"] {
+	display: none;
+}
+
+.roomSize {
+	height: auto;
+	width: auto;
+	margin: auto;
+	padding: 15px 5px;
+	box-sizing: border-box;
+}
+
+.roomSize .section {
+	display: flex;
+	width: max-content;
+	margin: 10px auto;
+}
+
+.roomSize label {
+	line-height: 25px;
+	font-size: 15px;
+}
+
+.roomSize input {
+	margin-left: 7px;
+	width: 100px;
+	height: 20px;
+	font-size: 15px;
+	text-align: right;
+}
+
+.unit {
+	width: 20px;
+}
+
+input::-webkit-inner-spin-button {
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+
+.filterReset {
+	width: 80px;
+	height: 40px;
+	margin-top: 10px;
+	margin-right: 20px;
+	justify-self: end;
+}
+
+.lists {
+	/* padding: ; */
+	height: 85vh;
+	overflow: auto;
+	/* border: 1px solid lightgray; */
+}
+
+.items {
+	cursor: pointer;
+}
+
+.items:hover {
+	background-color: #f2f2f2;
+}
+
+.roomInfo {
+	display: grid;
+	width: auto;
+	padding: 12px;
+	box-sizing: border-box;
+	grid-template-columns: 140px 56%;
+	grid-gap: 20px;
+}
+
+.itemImg {
+	width: 138px;
+	height: 140px;
+	box-sizing: border-box;
+	position: relative;
+}
+
+.itemImg img {
+	width: 100%;
+	height: 100%;
+}
+
+.itemInfo {
+	display: flex;
+	flex-direction: column;
+}
+
+.itemInfo h1 {
+	height: 30px;
+	font-size: 18px;
+	margin: 0 0 2px;
+}
+
+.itemInfo p {
+	height: 24px;
+	font-size: 14px;
+	margin: 0 0 2px;
+}
+
+.wrap {
+	position: absolute;
+	left: 0;
+	bottom: 40px;
+	width: 288px;
+	height: 132px;
+	margin-left: -144px;
+	text-align: left;
+	overflow: hidden;
+	font-size: 12px;
+	font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+	line-height: 1.5;
+}
+
+.wrap * {
+	padding: 0;
+	margin: 0;
+}
+
+.wrap .info {
+	width: 286px;
+	height: 120px;
+	border-radius: 5px;
+	border-bottom: 2px solid #ccc;
+	border-right: 1px solid #ccc;
+	overflow: hidden;
+	background: #fff;
+}
+
+.wrap .info:nth-child(1) {
+	border: 0;
+	box-shadow: 0px 1px 2px #888;
+}
+
+.info .title {
+	padding: 5px 0 0 10px;
+	height: 30px;
+	background: #eee;
+	border-bottom: 1px solid #ddd;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.info .close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	color: #888;
+	width: 17px;
+	height: 17px;
+	background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');
+}
+
+.info .close:hover {
+	cursor: pointer;
+}
+
+.info .body {
+	position: relative;
+	overflow: hidden;
+}
+
+.info .desc {
+	position: relative;
+	margin: 13px 0 0 90px;
+	height: 75px;
+}
+
+.desc .ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.desc .jibun {
+	font-size: 11px;
+	color: #888;
+	margin-top: -2px;
+}
+
+.info .img {
+	position: absolute;
+	top: 6px;
+	left: 5px;
+	width: 73px;
+	height: 71px;
+	border: 1px solid #ddd;
+	color: #888;
+	overflow: hidden;
+}
+
+/* .info:after {
+		content: '';
+		position: absolute;
+		margin-left: -12px;
+		left: 50%;
+		bottom: 0;
+		width: 22px;
+		height: 12px;
+		background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+	} */
+
+.info .link {
+	color: #5085BB;
+}
+
+#kMap {
+	width: 100%;
+	height: 100%;
+	border: 1px solid lightgray;
+	position: relative;
+	overflow: hidden;
+}
+
+.page-num-btn-container {
+	display: inline;
+}
+
+.previous-btn,
+.next-btn,
+.page-num-btn {
+	display: inline;
+	padding: 0px 14px;
+	border: 1px solid #dddddd;
+   line-height: 38px;
+   text-decoration: none;
+   background-color: white;
+   border-left-width: 0;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16), 0 1px 2px rgba(0, 0, 0, 0.23);
+	cursor: pointer;
+}
+
+.previous-btn-disabled,
+.next-btn-disabled {
+	display: inline;
+	padding: 0px 14px;
+	border: 1px solid #dddddd;
+   line-height: 38px;
+   text-decoration: none;
+   background-color: lightgray;
+   color: gray;
+   cursor: not-allowed;
+   border-left-width: 0;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16), 0 1px 2px rgba(0, 0, 0, 0.23);
+}
+
+.previous-btn:hover,
+.next-btn:hover,
+.page-num-btn:hover {
+	font-weight: 800;
+	background-color: teal;
+	color: ghostwhite;
+}
+
+.page-num-btn-selected {
+   background-color: teal;
+   color: ghostwhite;
+}
+
+.post-container {
+	display: flex;
+	align-items: center;
+	border-radius: 10px;
+	border: 2px solid #d7d7d7;
+	margin: 15px;
+}
+
+.post-title {
+	font-size: 20px;
+}
+
+.post-number {
+	font-size: 15px;
+	padding: 15px;
+}
+
+.room-info {
+	padding: 5px;
+	z-index: 1;
+	border-radius: 10px;
+}
+
+.image_text {
+	background-color: black;
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: white;
+	z-index: 2;
+}
+
+#saleList {
+	position: relative;
+}
+
+.empty {
+	
+	margin-top: 50px;
+	text-align: center;
+	width: auto;
+}
+
+.empty img {
+	width: 150px;
+}
+
+.empty h1 {
+	font-size: 20px;
+}
+
+.filterList,
+.close,
+/* .btn이 다른 css랑 겹쳐서 아이디로 따로 처리해놓음 (#filter-on, #list-up) */
+#filter-on,
+#list-up,
+#search,
+.searchBar,
+#mapPlacesList {
+	display: none;
+}
+
+@media (max-width: 768px) {
+
+	/* 이게 화면이 작아지면 지도가 아예 작게 변해서 화면에 맞게 작아지게 하려고 이렇게 씀 */
+	.map_wrap {
+		width: 100%;
+	}
+
+	/* 얘는 기억 안나는데 얘도 반응형 할라고 했던것 같은데 */
+	.properties-area.recent-property {
+		width: 100%;
+		height: 60px;
+		display: block;
+	}
+
+	/* 하단 콜랩스 스타일 */
+	.listAndSearch {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100vw;
+		background-color: #fff;
+		/* 배경색 설정 */
+		z-index: 999;
+		/* 다른 요소 위에 표시되도록 설정 */
+		transition: transform 0.3s ease;
+		/* 슬라이드 애니메이션 효과 설정 */
+		transform: translateY(100%);
+		/* 초기에 숨겨진 상태 */
+		max-height: calc(100% - 120px);
+	}
+
+	.listAndSearch.active {
+		transform: translateY(0);
+		/* 활성화 시 보이도록 슬라이드 업 */
+	}
+
+	.filterList {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		background-color: #fff;
+		/* 배경색 설정 */
+		z-index: 999;
+		/* 다른 요소 위에 표시되도록 설정 */
+		transition: transform 0.3s ease;
+		/* 슬라이드 애니메이션 효과 설정 */
+		transform: translateY(100%);
+		/* 초기에 숨겨진 상태 */
+		max-height: 100vh;
+	}
+
+	.filterList.active {
+		transform: translateY(43%);
+		/* 활성화 시 보이도록 슬라이드 업 */
+	}
+
+	.filterList h1 {
+		font-size: 18px;
+		margin: 10px 0;
+	}
+
+	.filterSearch {
+		width: 100%;
+		height: 60px;
+		display: flex;
+		padding: 0 10px 0 10px;
+		border: 1px solid lightgray;
+		font-size: 14px;
+		font-weight: 700;
+		justify-content: center;
+		align-items: center;
+	}
+	
+	input[class="sale-type-check"]+label {
+		display: inline-block;
+		top: 7.5px;
+		margin: 0px;
+		width: 28px;
+		height: 28px;
+		cursor: pointer;
+		position: relative;
+		border-radius: 5px;
+		border: 2px solid #FDC600;
+	}
+
+	#menu_wrap,
+	.roomFilter,
+	.filterReset {
+		display: none;
+	}
+
+	.searchBar {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.search-form.wow.pulse.form-inline-fixed {
+		box-sizing: border-box;
+		height: 60px;
+		width: 100%;
+		margin-top: 5px;
+		padding: 10px;
+		display: flex;
+		justify-content: center;
+		border: none;
+	}
+
+	.search-form.wow.pulse.form-inline-fixed input {
+		width: 68vw;
+		height: 40px;
+	}
+
+	.lists {
+		height: 70vh;
+		overflow: auto;
+		position: relative;
+	}
+
+	#filter-on,
+	#list-up {
+		width: 40px;
+		height: 40px;
+		padding: 5px;
+		margin-left: 10px;
+		box-sizing: border-box;
+	}
+
+	.filterList,
+	#filter-on,
+	#list-up,
+	#search,
+	#mapPlacesList,
+	.close,
+	.placeResult {
+		display: block;
+	}
+
+	.room-type,
+	.sale-type,
+	.room-size {
+		padding: 10px 10px;
+	}
+
+	.placeResult {
+		height: 50vh;
+		z-index: 3;
+		position: absolute;
+		overflow-y: auto;
+		background-color: white;
+	}
+
+	.empty {
+		position: absolute;
+		margin-top: 50px;
+		text-align: center;
+		width: 100vw;
+	}
+	
+	.form-group {
+		position: relative;
+	}
+	
+	#searchBtn {
+		top: 5px;
+		right: 10px;
+		padding: 0;
+		position: absolute;
+		background-color: transparent;
+	}
+
+	.empty img {
+		width: 100px;
+	}
+
+	.empty h1 {
+		font-size: 20px;
+	}
+	
+	.modal-body h1 {
+		font-size: 20px;
+	}
+	
+	.footer {
+		display: none;
+	}
+}
+
+.filter-modal-btn {
+	color: #FFF;
+	background-color: #FDC600;
+	border-color: #FDC600;
+	border-radius: 1px;
+	padding: 10px 20px;
+	font-weight: 600;
+	width: 120px;
+}
+
+.filter-modal-btn:hover {
+	color: #FDC600;
+	background-color: #313538;
+	border-color: #282829;
+	font-weight: 600;
+}

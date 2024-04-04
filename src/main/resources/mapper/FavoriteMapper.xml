@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.secu.favorite.mapper.FavoriteMapper">
+	<!-- 관심 매물 등록 -->
+	<insert id="insertFavorite">
+		INSERT INTO FAVORITE(MEMBER_NUM, ROOM_NUM)
+		VALUES(#{memberNum}, #{roomNum})
+	</insert>
+	
+	<!-- 사용자가 이미 등록한 관심 매물인지 확인 -->
+	<select id="selectIsRegistered" resultType="int">
+		SELECT COUNT(*)
+		FROM FAVORITE F
+		INNER JOIN ROOM R
+		ON F.ROOM_NUM = R.ROOM_NUM
+		WHERE F.MEMBER_NUM = #{memberNum}
+		AND F.ROOM_NUM = #{roomNum}
+	</select>
+	
+	<!-- 사용자 본인의 관심 매물 목록 -->
+	<select id="selectFavoriteList" resultType="com.project.secu.favorite.vo.FavoriteVO">
+		SELECT F.FAVORITE_NUM, F.ROOM_NUM, R.ROOM_TRADE_TYPE, R.ROOM_DEPOSIT, 
+		R.ROOM_PRICE, R.ROOM_SPACE_METER, R.ROOM_FLOOR, R.ROOM_BUILDING_FLOOR, 
+		R.ROOM_STATUS, R.ROOM_DETAIL_TITLE, RI.ROOM_IMG_PATH, R.ROOM_TYPE,
+		R.ROOM_BEDS_NUM, R.ROOM_BATH_NUM, R.ROOM_ROAD_ADDRESS
+		FROM FAVORITE F 
+		INNER JOIN MEMBER M 
+		INNER JOIN ROOM R
+		INNER JOIN ROOM_IMG RI
+		ON F.MEMBER_NUM = M.MEMBER_NUM
+		AND F.ROOM_NUM = R.ROOM_NUM
+		AND F.ROOM_NUM = RI.ROOM_NUM
+		WHERE F.MEMBER_NUM = #{memberNum}
+		AND RI.ROOM_IMG_SEQUENCE = 1
+		ORDER BY F.FAVORITE_NUM DESC
+	</select>
+	
+	<!-- 사용자가 이미 등록한 관심 매물의 매물 번호 목록 조회 -->
+	<select id="selectAlreadyRegisteredRoomNumList" resultType="int">
+		SELECT R.ROOM_NUM
+		FROM FAVORITE F
+		INNER JOIN ROOM R
+		ON F.ROOM_NUM = R.ROOM_NUM
+		<where>
+			F.MEMBER_NUM = #{memberNum}
+			<if test='recentlyViewedRoomNumList != null'>
+				AND F.ROOM_NUM IN
+				<foreach collection="recentlyViewedRoomNumList" item="roomNum" separator="," open="(" close=")">#{roomNum}</foreach>
+			</if>
+		</where>
+		<!-- SELECT COUNT(*)
+		FROM FAVORITE F
+		INNER JOIN ROOM R
+		ON F.ROOM_NUM = R.ROOM_NUM
+		WHERE F.MEMBER_NUM = #{memberNum}
+		AND F.ROOM_NUM = #{roomNum} -->
+	</select>
+
+	<!-- 사용자가 이미 등록한 관심 매물인지 확인 -->
+	<select id="selectIsRegisteredFavorite" resultType="int">
+		SELECT COUNT(*)
+		FROM FAVORITE
+		WHERE MEMBER_NUM = #{memberNum}
+		AND ROOM_NUM = #{roomNum}
+	</select>
+
+	<!-- 관심 매물로 등록 했던것을 취소 -->
+	<delete id="deleteFavorites">
+		DELETE FROM FAVORITE
+		WHERE MEMBER_NUM = #{memberNum}
+		AND ROOM_NUM = #{roomNum}
+	</delete>
+</mapper>

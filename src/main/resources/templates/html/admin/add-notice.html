@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<div th:replace="html/fragment/header.html :: f-header"></div>
+		<link rel="stylesheet" href="/css/posting.css">
+</head>
+
+<body>
+    <div id="preloader">
+        <div id="status">&nbsp;</div>
+    </div>
+
+    <div th:replace="html/fragment/nav.html :: f-nav"></div>
+
+    <div class="page-head"> 
+        <div class="container">
+            <div class="row">
+                <div class="page-head-content">
+                    <h1 class="page-title">글 쓰기</h1>               
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="content-area recent-property padding-top-40" style="background-color: #FFF;">
+        <div class="container">  
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2"> 
+                    <div class="formArea" id="contact1">
+                        <form>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <div class="titleArea">
+                                            <input type="text" class="form-control" id="noticeTitle" placeholder="제목을 입력하세요.">
+                                        </div>
+                                        <hr>
+                                        <div class="descArea">
+                                            <textarea name="desc" id="noticeDetail" style="width: 1094px; height: 536px; resize: none;"></textarea>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 text-center">
+                                    <input type='button' class='btn btn-finish btn-primary' id="addBtn" onclick="noticeUpload()" value='등록' />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer area-->
+    <div th:replace="html/fragment/footer.html :: f-footer"></div>
+    
+    <script src="/js/ckeditor/ckeditor.js"></script>
+    <script src="/js/posting.js"></script>
+	<script>
+		async function noticeUpload() {
+			
+			if(document.querySelector('#noticeTitle').value.length > 100){
+				alert('제목은 100자를 초과할 수 없습니다');
+				return;
+			}
+			
+			const res = await fetch('/notice', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json;charset=UTF-8'
+				},
+				body: JSON.stringify({
+					noticeTitle: document.querySelector('#noticeTitle').value,
+					noticeDetail: document.querySelector('.ck-editor__editable').innerHTML
+				})
+			});
+			const data = await res.json();
+
+			if (data === 1) {
+				alert('공지사항이 등록되었습니다.');
+				location.href = '/html/admin/admin-notice';
+			} else {
+				alert('공지사항 등록 실패하였습니다.');
+			}
+		}
+	</script>
+</body>
+
+</html>

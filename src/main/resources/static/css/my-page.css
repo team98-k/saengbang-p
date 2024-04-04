@@ -1,0 +1,32 @@
+.mypage-btn-container {
+	display: block;
+	height: 50px;
+	margin: 20px 10%;
+	justify-content: space-between;
+	text-align: center;
+}
+
+.mypage-btn {
+	color: #FFF;
+	background-color: #FDC600;
+	border-color: #FDC600;
+	border-radius: 1px;
+
+
+	padding: 10px 20px;
+	font-weight: 600;
+	width: 120px;
+}
+
+.mypage-btn:hover {
+	color: #FDC600;
+	background-color: #313538;
+	border-color: #282829;
+	font-weight: 600;
+}
+
+#wrapper {
+	height: auto;
+	min-height: 100%;
+	padding-bottom: 114px;
+}

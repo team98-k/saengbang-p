@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+
+<head>
+	<div th:replace="html/fragment/header.html :: f-header"></div>
+</head>
+
+<body>
+	<div id="wrapper">
+		<div id="preloader">
+			<div id="status">&nbsp;</div>
+		</div>
+		<div th:replace="html/fragment/nav.html :: f-nav"></div>
+		<!-- Body content -->
+		<div class="register-area" style="background-color: rgb(249, 249, 249);padding-bottom: 150px;">
+			<div class="container">
+				<div class="col-md-6">
+					<div class="box-for overflow" style="height: 300px; border-radius: 30px;">
+						<div class="col-md-12 col-xs-12 register-blocks">
+
+							<form action="" method="post">
+								<div class="descript" onclick="location.href='/html/realtor/agent-page'">
+									<img src="/imgs/press-pass.png" alt="본인 정보"
+										style=" width:180px; height:150px; display: block; margin:auto; margin-top: 10%;"><br>
+									<div style="font-size: 20px; font-weight: bold; text-align: center;">본인 정보</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="box-for overflow" style="height: 300px; border-radius: 30px;">
+						<div class="col-md-12 col-xs-12 login-blocks">
+							<form action="" method="post">
+								<div class="descript" onclick="location.href='/html/realtor/for-sale'">
+									<img src="/imgs/museum-ticket.png" alt="매물 등록"
+										style=" width:150px; height:150px;display: block; margin:auto; margin-top: 15%;">
+									<div style="font-size: 20px; font-weight: bold; text-align: center;">매물 등록</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 이거 얘만 조금 다르게 보여야되서 이렇게 한거니까 건드리지 말아주세요 -->
+	<!-- Footer area-->
+	<!-- <div class="footer-area" th:fragment="f-footer" style="position: relative; transform: translateY(-100%);">
+		<div class="footer" style="padding-bottom: 5px;">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 col-sm-6">
+						<div class="single-footer" style="margin-top: 5px;">
+							<h4>About us </h4>
+							<div class="footer-title-line" style="margin: 0px 0px 5px;"></div>
+							<p style="padding-bottom: 5px;">4팀 프로젝트</p>
+							<p style="padding-bottom: 5px;">(김용준, 김정훈, 류승호, 이원기, 홍동인)</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+	<div style="position: relative; transform: translateY(-100%);">
+		<div th:replace="html/fragment/footer.html :: f-footer"></div>
+	</div>
+</body>
+
+</html>

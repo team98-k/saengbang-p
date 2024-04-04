@@ -1,0 +1,67 @@
+
+	
+	.loginComment {
+		height: 650px;
+		width: 500px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 130px;
+		font-size: 60px;
+		text-align: center;
+		border: 1px solid lightgray;
+	}
+	h5 {
+		margin: 70px 0 50px 0;
+	}
+	.Email input {
+		width: 60%;
+		height: 50px;
+		font-size: 15px;
+		padding-left: 15px;
+		box-sizing: border-box;
+	}
+	.password input {
+		width: 60%;
+		height: 50px;
+		font-size: 15px;
+		padding-left: 15px;
+		box-sizing: border-box;
+	}
+	.check {
+		margin-top: 20px;
+	}
+	.check button {
+		width: 60%;
+		height: 50px;
+		margin-bottom: 10px;
+	}
+	.otherOption {
+		display: flex;
+		height: 20px;
+		width: auto;
+		margin-right: auto;
+		padding-left: 35px;
+		padding-right: 35px;
+	}
+	.otherOption div {
+		height: auto;
+		width: 200px;
+		border: 1px solid lightgray;
+		margin: 20px;
+	}
+	.otherOption p {
+		font-size: 13px;
+		text-align: center;
+		color: lightgray;
+	}
+	.signUp {
+		margin-top: 50px;
+	}
+	.signUp p {
+		margin: 0;
+		font-size: 20px;
+	}
+	.signUp #goSignUp {
+		margin-left: 20px;
+		color: deepskyblue;
+	}

@@ -1,0 +1,86 @@
+.search-form {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px 20px 20px 20px !important;;
+    border: 1px solid #E6E6E6;
+    box-sizing: border-box;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 9;
+}
+
+/* 모바일 화면에서 오버라이드 */
+@media (max-width: 767px) {
+    .search-form {
+        padding: 0;
+    }
+
+    .search-form .form-inline {
+        display: flex;
+    }
+
+    .search-form .form-inline .form-group {
+        width: calc(100% - 70px);
+        /* 검색 버튼을 제외한 나머지 부분을 차지하도록 설정 */
+        margin-right: 5px;
+        /* 간격 조절 */
+    }
+
+    .search-form .form-inline .btn.search-btn {
+        flex-shrink: 0;
+        /* Flexbox에서 버튼이 축소되지 않도록 설정 */
+    }
+    
+    .owl-pagination {
+		display: none;
+	}
+}
+/* pc 화면에서 오버라이드 */
+@media (min-width: 768px) {
+    .search-form .form-inline .form-group { 
+        width: calc(100% - 70px) !important;
+        /* 검색 버튼을 제외한 나머지 부분을 차지하도록 설정 */
+        margin-right: 5px;
+        /* 간격 조절 */
+    }
+}
+.item-thumb h1 {
+    font-size: 30px;
+    position: absolute;
+    background-color: black;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    z-index: 2;
+}
+
+input[class="like"]+label {
+    position: absolute;
+    display: inline-block;
+    top: 10px;
+    right: 10px;
+    margin: 10px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background-size: cover;
+    background-image: url("/imgs/unliked.png");
+}
+
+input[class="like"]:checked+label {
+    position: absolute;
+    display: inline-block;
+    top: 10px;
+    right: 10px;
+    margin: 10px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background-size: cover;
+    background-image: url("/imgs/liked.png");
+}
+
+input[class="like"] {
+    display: none;
+}

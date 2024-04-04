@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+
+<head>
+    <div th:replace="html/fragment/header.html :: f-header"></div>
+    <link rel="stylesheet" th:href="@{/assets/css/wizard.css}">
+	<link rel="stylesheet" th:href="@{/css/for-sale.css}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    <script th:src="@{'//dapi.kakao.com/v2/maps/sdk.js?'+'appkey='+${@environment.getProperty('kakao.appKey')}}+'&libraries=services'"></script>
+    <script type="application/javascript" th:src="@{/assets/js/web_support.js}" defer></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="preloader">
+            <div id="status">&nbsp;</div>
+        </div>
+        <div th:replace="html/fragment/nav.html :: f-nav"></div>
+        <!-- property area -->
+        <div class="content-area submit-property" style="background-color: #FCFCFC; padding-bottom: 114px;">&nbsp;
+            <div class="container">
+                <div class="clearfix">
+                    <div class="wizard-container">
+                        <div class="wizard-card ct-wizard-orange" id="wizardProperty">
+                            <form action="" method="">
+                                <div class="wizard-header">
+                                    <h3>
+                                        <b>매물 수정</b><br>
+                                        <small>매물 수정 페이지</small>
+                                    </h3>
+                                </div>
+    
+                                <ul>
+                                    <li><a href="/#step1" data-toggle="tab">Step 1 </a></li>
+                                    <li><a href="/#step2" data-toggle="tab">Step 2 </a></li>
+                                    <li><a href="/#step3" data-toggle="tab">Step 3 </a></li>
+                                    <li><a href="/#step4" data-toggle="tab">Finished </a></li>
+                                </ul>
+    
+                                <div class="tab-content">
+                                    <div class="tab-pane" id="step1">
+                                        <div class="p-b-15">
+                                            <h4 class="info-text" style="margin-bottom: 10px;">올릴 수 있는 사진의 개수는 최소 5개, 최대 15개 입니다.</h4>
+                                            <p class="info-text">
+                                                첫번째 사진은 매물의 대표 사진입니다.
+                                            </p>
+                                            <div class="plusImg">
+                                                <div class="sortImg" id="imgList"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--  End step 1 -->
+    
+                                    <div class="tab-pane" id="step2">
+                                        <h4 class="info-text"> 기본 정보 </h4>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12 padding-top-15">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <div class="address">
+                                                                        <h3>주소</h3>
+                                                                        <div class="inputAddr"
+                                                                            style="padding: 0 0 0 90px;">
+                                                                        </div>
+                                                                        <div class="showAddr">
+                                                                            <div class="form-group">
+                                                                                <label>우편번호</label>
+                                                                                <div class="form-group" style="display: flex; gap: 10px;">
+                                                                                    <input type="text" class="form-control valid" id="postCode" placeholder="우편번호" readonly>
+                                                                                    <button type="button" id="button" class="btn btn-default" onclick="findPostCode()">우편번호 찾기</button>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>도로명 주소</label>
+                                                                                <input type="text" class="form-control valid" id="roomRoadAddress" placeholder="도로명 주소" readonly>
+                                                                                <span style="display: none;" id="roomLatitude"></span>
+                                                                                <span style="display: none;" id="roomLongitude"></span>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>지번 주소</label>
+                                                                                <input type="text" class="form-control valid" id="roomJibunAddress" placeholder="지번 주소" readonly>
+                                                                                <span id="guide" style="color:#999;display: none;"></span>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>상세 주소</label>
+                                                                                <input type="text" class="form-control valid" id="roomDetailAddress" placeholder="상세 주소를 입력하세요">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+    
+                                                <div class="col-sm-12">
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group">
+                                                            <label>가격 정보 :</label>
+                                                            <select class="form-control valid"
+                                                                onchange="changeTradeType(this)" id="roomOption">
+                                                                <option value="">거래 종류 선택</option>
+                                                                <option value="월세">월세</option>
+                                                                <option value="전세">전세</option>
+                                                                <option value="매매">매매</option>
+                                                            </select>
+                                                            <div id="priceInputContainer">
+                                                                <input type="hidden" id="roomTradeType">
+                                                                <div id="price1"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+    
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group">
+                                                            <div class="form-group">
+                                                                <label>방 종류 :</label>
+                                                                <select id="roomType" class="form-control valid">
+                                                                    <option value="">방 종류 선택</option>
+                                                                    <option value="원룸">원룸</option>
+                                                                    <option value="투룸">투룸</option>
+                                                                    <option value="쓰리룸">쓰리룸</option>
+                                                                    <option value="아파트">아파트</option>
+                                                                    <option value="오피스텔">오피스텔</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>방 개수</label>
+                                                                <div style="display: flex; align-items: center;">
+                                                                    <input type="text" class="form-control valid" id="roomBedsNum"
+                                                                            placeholder="숫자를 입력해주새요">
+                                                                    <span>개</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>욕실 개수</label>
+                                                                <div style="display: flex; align-items: center;">
+                                                                    <input type="text" class="form-control valid" id="roomBathNum"
+                                                                    placeholder="숫자를 입력해주새요">
+                                                                    <span>개</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>난방</label>
+                                                                <select class="form-control valid" id="roomHeating">
+                                                                    <option value="">난방 종류 선택</option>
+                                                                    <option value="지역난방">지역난방</option>
+                                                                    <option value="중앙난방">중앙난방</option>
+                                                                    <option value="개별난방">개별난방</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group">
+                                                            <div class="form-group">
+                                                                <label>방향</label>
+                                                                <select class="form-control valid" id="roomDirection">
+                                                                    <option value="">방향 선택</option>
+                                                                    <option value="남">남</option>
+                                                                    <option value="남동">남동</option>
+                                                                    <option value="남서">남서</option>
+                                                                    <option value="동">동</option>
+                                                                    <option value="서">서</option>
+                                                                    <option value="북">북</option>
+                                                                    <option value="북동">북동</option>
+                                                                    <option value="북서">북서</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>주차 가능 여부</label>
+                                                                <select class="form-control valid" id="roomParking" onchange="changePStatus(this)">
+                                                                    <option value="">선택하세요</option>
+                                                                    <option value="가능">가능</option>
+                                                                    <option value="불가능">불가능</option>
+                                                                </select>
+                                                                <div class="hiddenPContent" style="display: none; margin-top: 4px;align-items: center;">
+                                                                    <input type="number" class="form-control valid" id="roomParkingNum"
+                                                                        placeholder="숫자를 입력해주세요">
+                                                                    <span>대</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>현관 유형</label>
+                                                                <select class="form-control valid" id="roomEntranceType">
+																	<option value="">현관 유형 선택</option>
+																	<option value="복도식">복도식</option>
+																	<option value="계단식">계단식</option>
+																	<option value="복합식">복합식</option>
+																</select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>입주 여부</label>
+                                                                <select class="form-control valid" onchange="changeDStatus(this)" id="roomMovingDate">
+																	<option value="">선택하세요</option>
+																	<option value="즉시 입주">즉시 입주</option>
+																	<option value="날짜 선택">날짜 선택</option>
+																</select>
+																<div class="hiddenDContent" style="display: none; margin-top: 4px;">
+																	<input class="form-control" type="date" id="roomMovingDate">
+																</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group">
+                                                            <div class="form-group">
+                                                                <label>전용 면적</label>
+																<div style="display: flex; align-items: center;">
+																	<input type="text" class="form-control valid roomSpaceMeter"
+																		id="roomSpaceMeter" placeholder="숫자를 입력해주세요"> ㎡
+																</div>
+																<div style="display: flex; align-items: center; margin-top: 14px;">
+																	<input type="number" class="form-control valid pyeong" readonly> 평
+																</div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>엘리베이터 여부</label>
+																<select class="form-control valid" id="roomElevator">
+																	<option value="">선택하세요</option>
+																	<option value="있음">있음</option>
+																	<option value="없음">없음</option>
+																</select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>층수</label>
+																<div>
+																	<input type="text" class="form-control valid roomBuildingFloor"
+																		placeholder="전체 층수" id="roomBuildingFloor">
+																</div>
+																<div style="margin-top: 14px;">
+																	<input type="text" class="form-control valid roomFloor"
+																		placeholder="매물 층수" id="roomFloor">
+																</div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>총 세대 수</label>
+																<input type="text" class="form-control valid roomHouseholdNum" placeholder="총 세대 수" id="roomHouseholdNum">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End step 2 -->
+    
+                                    <div class="tab-pane" id="step3">
+                                        <h4 class="info-text"> 매물 소개 </h4>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <p>
+                                                    <input type="text" class="form-control valid roomDetailTitle" placeholder="상세 설명 제목을 입력하세요"
+                                                        id="roomDetailTitle" maxlength="25">
+                                                    <textarea class="form-control valid" placeholder="방에 대한 상세한 설명을 입력하세요"
+                                                        id="roomDetail" style="resize: none; height: 500px; margin-top: 10px;"></textarea>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--  End step 3 -->
+    
+                                    <div class="tab-pane" id="step4">
+                                        <h4 class="info-text"> 주의 사항 </h4>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="">
+                                                    <p>
+                                                        ① 매물 정보와 관련없는 문구,특수문자 등이 포함되어 있을 경우 전체 매물특징이 임의로 삭제될 수 있다.
+                                                        <br>
+                                                        ② 매물특징 삭제기준 및 사례
+                                                        <br>
+                                                        1) 중개업소명 or 전화번호 노출
+                                                        <br>
+                                                        2)단지내부동산' 'XX단지 전문 부동산','XX 년된 부동산' 등 중개업소 소개(일요일 영업,책임중개 등) 단!
+                                                        일요일에도 볼수있는 매물입니다. (통과)
+                                                        <br>
+                                                        (단,매물확인 후 매물이 아파트가 아닌 상가건물일 경우 삭제 아님 /단지내에 있는 부동산을 매물로 내놓기때문)
+                                                        <br>
+                                                        3) 특수문자,의미없는 자음,모음,알파벳 사용 불가
+                                                        <br>
+                                                        4) 전화연결 유도 문구 포함(문의환영,상담환영,전화,상담 등)
+                                                        <br>
+                                                        5) 부동산 위치안내,공매
+                                                        <br>
+                                                        6) 기타(블로그,중개료 할인,그냥 중개료 수수료 문구 전부,홈페이지,담당자 이름,독점매물,매물다량보유,단독물건 등)
+                                                        <br>
+                                                        7) '매물의 특징과 관련한 한자,영어를 한 단어,내지는 한자 쓰는 것은 가능'
+                                                        그러나 매물 특징에서 벗어난 한자나 영어,일어를 쓰는 것은 불가.
+                                                        또한 특수효과를 노리고자 반복하여 쓰는 것도 불가.
+                                                        <br>
+                                                        8) ~년 경력 / ~전문 (예:홍길동아파트전문 부동산임)
+                                                        <br>
+                                                        9) "평","평형","형","py" 또는 "평"과 "형"단위를 혼용하여 사용한 경우 (숫자만 기재하여 평형을 암시하는
+                                                        경우 포함)
+                                                        <br>
+                                                        예) 전용 85㎡(구33평형),109㎡(33형),109㎡(33) ,45,34
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="wizard-footer">
+                                    <div class="pull-right">
+                                        <input type='button' class='btn btn-next btn-primary' name='next' value='Next' />
+                                        <input type='button' class='btn btn-finish btn-primary ' name='finish' id="addBtn"
+                                            onclick="addRoom()" value='수정' />
+                                    </div>
+    
+                                    <div class="pull-left">
+                                        <input type='button' class='btn btn-previous btn-default' name='previous'
+                                            value='Previous' />
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- End submit form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="position: relative; transform: translateY(-100%);">
+		<div th:replace="html/fragment/footer.html :: f-footer"></div>
+	</div>
+	<script type="application/javascript" th:src="@{/assets/js/web_support.js}" defer></script>
+	<script th:src="@{//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js}"></script>
+	<script th:src="@{/assets/js/jquery.bootstrap.wizard.js}" type="text/javascript"></script>
+	<script th:src="@{/assets/js/jquery.validate.min.js}"></script>
+	<script th:src="@{/assets/js/wizard.js}"></script>
+	<script th:src="@{/js/update-room.js}"></script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+	/* body {
+		margin: 0;
+		width: 100%;
+	}
+	
+	p {
+		margin: 0
+	}
+	h1 {
+		margin: 0;
+		width: auto;
+		height: 24px;
+		padding: 15px 30px;
+		font-size: 18px;
+		color: ghostwhite;
+		background-color: darkslategray;
+	} */
+	
+	.qna-modal-middle {
+		padding: 30px;
+	}
+	
+	.qna-modal-title {
+		border-bottom: 1px solid darkgray;
+		padding-bottom: 25px;
+	}
+	
+	.modal-roomInquiryTitle {
+		padding: 5px 5px;
+		width: 100%;
+	}
+	.modal-roomInquiryDetail {
+		padding: 5px 5px;
+		resize: none;
+		width: 100%;
+		height: 110px;
+	}
+	
+	.count {
+		width: auto;
+		float: right;
+		font-size: 12px;
+	}
+	.qna-modal-check {
+		height: 40px;
+		margin-top: 10px;
+		border-bottom: 1px solid darkgray;
+	}
+	.buttons {
+		margin-top: 30px;
+		text-align: center;
+	}
+	.buttons button{
+		height: 40px;
+		width: 120px;
+		margin: 2px;
+	}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" style="height: 100vh;"> <!--<![endif]-->
+
+<head>
+	<div th:replace="html/fragment/header.html :: f-header"></div>
+	<link rel="stylesheet" href="/css/my-page.css">
+	<script type="application/javascript" th:src="@{/assets/js/web_support.js}" defer></script>
+</head>
+
+<body>
+	<div id="wrapper" style="background-color: #FCFCFC;">
+		<div th:replace="html/fragment/nav.html :: f-nav"></div>
+		<div class="content-area user-profiel" style="padding-bottom: 0;">&nbsp;
+			<div class="container">
+				<div class="col-sm-10 col-sm-offset-1 profiel-container" style="border: 1px solid lightgray; border-radius: 10px;">
+					<div class="profiel-header">
+						<h3>
+							<b>마이페이지</b>
+						</h3>
+						<hr>
+					</div>
+					<div class="clear">
+						<div class="col-sm-5 col-sm-offset-1">
+							<div class="form-group">
+								<label>아이디</label>
+								<p id="memberId"></span>
+							</div>
+							<div class="form-group">
+								<label>이름</label>
+								<p id="memberName"></p>
+							</div>
+							<div class="form-group">
+								<label>전화번호</label>
+								<p id="memberPhone"></p>
+							</div>
+						</div>
+
+						<div class="col-sm-5">
+							<div class="form-group">
+								<label>주소</label>
+								<p id="memberAddress"></p>
+							</div>
+							<div class="form-group">
+								<label>이메일</label>
+								<p id="memberEmail"></p>
+							</div>
+						</div>
+					</div>
+					<div class="mypage-btn-container">
+						<button type="button" class="mypage-btn" data-toggle="modal" data-target="#staticBackdrop" id="changeInfoBtn">내정보
+							수정</button>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<button type="button" class="mypage-btn" id="btn" onclick="deleteUser()">회원 탈퇴</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">
+							내 정보 수정
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</h5>
+						<div style="border-bottom: 2px solid; margin-top: 10px;"></div>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="memberAddress">도로명 주소</label>
+							<div class="form-group" style="display: flex; gap: 10px;">
+								<input type="text" class="form-control" id="postCode" style="background-color: #FFFFFF;"
+									readonly>
+								<button class="btn btn-default" id="button" onclick="findPostCode()"
+									style="background-color: #FDC600;">
+									우편번호 찾기
+								</button>
+							</div>
+							<input type="text" class="form-control" id="memberAddress"
+								style="background-color: #FFFFFF;" readonly>
+							<span id="guide" style="color:#999;display:none"></span>
+						</div>
+						<div class="form-group">
+							<label for="memberName">이름</label>
+							<input type="text" class="form-control" id="memberName" placeholder="홍길동"></input>
+						</div>
+						<div class="form-group">
+							<label for="memberCurrentPassword">현재 비밀번호</label>
+							<input type="password" class="form-control" id="memberCurrentPassword" placeholder="현재 비밀번호">
+						</div>
+						<div class="form-group">
+							<label for="memberPassword">새 비밀번호</label>
+							<input type="password" class="form-control" id="memberPassword" placeholder="비밀번호">
+						</div>
+						<div class="form-group">
+							<label for="memberPasswordCheck">새 비밀번호 확인</label>
+							<input type="password" class="form-control" id="memberPasswordCheck" placeholder="비밀번호">
+							<p id="passwordCheckResult" style="font-weight: 600; color: red; display: none;"></p>
+						</div>
+						<div class="form-group">
+							<label for="memberEmail">이메일</label>
+							<input type="email" class="form-control" id="memberEmail"
+								placeholder="email@email.com"></input>
+							<p id="emailCheckResult" style="font-weight: 600;"></p>
+						</div>
+						<div class="form-group">
+							<label for="memberPhone">전화번호</label>
+							<input type="text" class="form-control" id="memberPhone" placeholder="010-0000-0000"
+								maxlength="13"></input>
+						</div>
+					</div>
+					<p style="padding: 10px 10px; color: gray; text-align: center;">내 정보를 타인에게 유출되지 않도록 주의해주세요</p>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="clearInput()">취소</button>
+						<button class="btn btn-default" onclick="updateMemberInfo()" style="margin-left: 5px;"
+							id="modify">변경</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="position: relative; transform: translateY(-100%);">
+		<div th:replace="html/fragment/footer.html :: f-footer"></div>
+	</div>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script th:src="@{/js/myPage.js}"></script>
+</body>
+
+</html>

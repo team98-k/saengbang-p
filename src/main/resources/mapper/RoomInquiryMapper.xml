@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.secu.roomInquiry.mapper.RoomInquiryMapper">
+	<!-- 매물 문의사항 작성 -->
+	<insert id="insertRoomInquiry" useGeneratedKeys="true" keyColumn="ROOM_INQUIRY_NUM" keyProperty="roomInquiryNum">
+		INSERT INTO ROOM_INQUIRY(ROOM_NUM, MEMBER_NUM, ROOM_INQUIRY_DETAIL, ROOM_INQUIRY_ISPUBLIC)
+		VALUES(#{roomNum}, #{memberNum}, #{roomInquiryDetail}, #{roomInquiryIspublic})
+	</insert>
+	
+	<!-- 해당 매물의 문의사항 목록 조회 -->
+	<select id="selectRoomInquiryList" resultType="com.project.secu.roomInquiry.vo.RoomInquiryVO">
+		SELECT RI.ROOM_INQUIRY_NUM, M.MEMBER_NUM, M.MEMBER_ID, RI.ROOM_NUM, RI.ROOM_INQUIRY_TITLE, RI.ROOM_INQUIRY_DETAIL, 
+		RI.ROOM_INQUIRY_ANSWER, RI.ROOM_INQUIRY_CREDAT, RI.ROOM_INQUIRY_STATUS, RI.ROOM_INQUIRY_ISPUBLIC,
+		RI.ROOM_INQUIRY_ANSWER_DATE
+		FROM ROOM_INQUIRY RI 
+		INNER JOIN MEMBER M
+		ON RI.MEMBER_NUM = M.MEMBER_NUM
+		WHERE RI.ROOM_NUM = #{roomNum}
+		ORDER BY RI.ROOM_INQUIRY_NUM DESC
+	</select>
+	
+	<!-- 해당 매물의 문의사항 답변 -->
+	<update id="updateRoomInquiryAnswer">
+		UPDATE ROOM_INQUIRY
+		SET ROOM_INQUIRY_ANSWER = #{roomInquiryAnswer}, ROOM_INQUIRY_STATUS = '답변완료', ROOM_INQUIRY_ANSWER_DATE = DATE_FORMAT(NOW(), '%Y-%m-%d')
+		WHERE ROOM_INQUIRY_NUM = #{roomInquiryNum}
+	</update>
+	
+	<!-- 해당 매물의 문의사항 상세 내용 -->
+	<select id="selectRoomInquiry" resultType="com.project.secu.roomInquiry.vo.RoomInquiryVO">
+		SELECT RI.ROOM_INQUIRY_NUM, M.MEMBER_ID, RI.ROOM_INQUIRY_TITLE, RI.ROOM_INQUIRY_DETAIL, 
+		RI.ROOM_INQUIRY_ANSWER, RI.ROOM_INQUIRY_CREDAT, RI.ROOM_INQUIRY_STATUS, RI.ROOM_INQUIRY_ANSWER_DATE 
+		FROM ROOM_INQUIRY RI
+		INNER JOIN MEMBER M
+		ON RI.MEMBER_NUM = M.MEMBER_NUM
+		WHERE RI.ROOM_INQUIRY_NUM = #{roomInquiryNum}
+	</select>
+</mapper>

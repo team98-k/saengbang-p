@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<div th:fragment="f-nav">
+    <nav class="navbar navbar-default ">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="topLogo" th:href="@{/}"><img src="/imgs/logo.png" alt="logo" style="width: 100px;"></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse yamm" id="navigation">
+                <div class="button navbar-right">
+                    <button class="navbar-btn nav-button login" id="loginHead"></button>
+                </div>
+                <ul id="headerNavList" class="main-nav nav navbar-nav navbar-right">
+                </ul>
+            </div>
+
+        </div><!-- /.container-fluid -->
+    </nav>
+    <!-- Modal -->
+    <div class="modal fade" style="overflow-y: hidden;" id="alarmStaticBackdrop" data-backdrop="static"
+        data-keyboard="false" tabindex="-1" aria-labelledby="alarmStaticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="height: calc(100% - 3.5rem);">
+            <div class="modal-content" style="max-height: 100%;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="alarmStaticBackdropLabel">
+                        알림
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </h5>
+                </div>
+                <div class="modal-body" style="max-height: calc(100vh - 200px);overflow-y: auto;">
+                    <ul class="alarm-ul" style="list-style: none;" id="alarmList">
+                        <div class="text-center mb-0 h1 display-2">알림이 없습니다.</div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/nav/head.js}"></script>
+    <script th:src="@{/js/nav/alarm.js}"></script>
+</div>
+
+</html>

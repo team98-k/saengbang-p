@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.secu.duplicateCheck.mapper.DuplicateCheckMapper">
+	<select id="selectDuplicateId" resultType="int">
+		SELECT COUNT(DUPLICATE) 
+		FROM 
+		(
+			SELECT COUNT(1) AS DUPLICATE
+			FROM ADMIN A
+			WHERE A.ADMIN_ID = #{loginId}
+			UNION ALL
+			SELECT COUNT(1) AS DUPLICATE
+			FROM MEMBER M
+			WHERE M.MEMBER_ID = #{loginId}
+			UNION ALL
+			SELECT COUNT(1) AS DUPLICATE
+			FROM REALTOR R
+			WHERE R.REALTOR_ID = #{loginId}
+		) AS DUPLICATE
+		WHERE DUPLICATE = 1
+	</select>
+
+	<select id="selectDuplicateRealtorRegistrationNum" resultType="int">
+		SELECT COUNT(1)
+		FROM REALTOR
+		WHERE REALTOR_REGISTRATION_NUM = #{realtorRegistrationNum}
+	</select>
+</mapper>

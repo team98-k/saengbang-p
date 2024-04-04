@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.secu.realtorSignUp.mapper.RealtorSignUpMapper">
+	<!-- 공인중개사 회원 가입 신청 -->
+	<insert id="insertRealtorSignUp">
+		INSERT INTO REALTOR_SIGNUP(REALTOR_ID, REALTOR_PASSWORD, REALTOR_NAME, REALTOR_PHONE, 
+		REALTOR_OFFICE_NAME, REALTOR_OFFICE_ADDRESS, REALTOR_OFFICE_DETAIL_ADDRESS, REALTOR_REGISTRATION_NUM,
+		REALTOR_IMG_PATH)
+		VALUES(#{realtorId}, #{realtorPassword}, #{realtorName}, #{realtorPhone}, 
+		#{realtorOfficeName}, #{realtorOfficeAddress}, #{realtorOfficeDetailAddress}, #{realtorRegistrationNum},
+		#{realtorImgPath})
+	</insert>
+	
+	<!-- 중개사 가입 신청 승인 -->
+	<update id="updateRealtorSignUpApprove">
+		UPDATE REALTOR_SIGNUP
+		SET REALTOR_SIGNUP_STATUS = '승인', ADMIN_NUM = #{adminNum}
+		WHERE REALTOR_SIGNUP_NUM = #{realtorSignupNum}
+	</update>
+	
+	<!-- 중개사 가입 신청 거부 -->
+	<update id="updateRealtorSignUpRefuse">
+		UPDATE REALTOR_SIGNUP
+		SET REALTOR_SIGNUP_STATUS = '거부', REALTOR_REFUSE_REASON = #{realtorRefuseReason}, ADMIN_NUM = #{adminNum}
+		WHERE REALTOR_SIGNUP_NUM = #{realtorSignupNum}
+	</update>
+	
+	<!-- 중개사 가입 신청 목록 (목록에서 안쓰는거 빼야됨) -->
+	<select id="selectRealtorSignUpList" resultType="com.project.secu.realtorSignUp.vo.RealtorSignUpVO">
+		SELECT REALTOR_SIGNUP_NUM, ADMIN_NUM, REALTOR_ID, REALTOR_PASSWORD, REALTOR_NAME, 
+		REALTOR_PHONE, REALTOR_OFFICE_NAME, REALTOR_OFFICE_ADDRESS, REALTOR_REGISTRATION_NUM, 
+		REALTOR_SIGNUP_STATUS, REALTOR_REFUSE_REASON, REALTOR_SIGNUP_CREDAT, REALTOR_OFFICE_DETAIL_ADDRESS
+		FROM REALTOR_SIGNUP
+		ORDER BY REALTOR_SIGNUP_NUM DESC
+	</select>
+	
+	<!-- 중개사 가입 신청 상세 정보 -->
+	<select id="selectRealtorSignUp" resultType="com.project.secu.realtorSignUp.vo.RealtorSignUpVO">
+		SELECT REALTOR_SIGNUP_NUM, REALTOR_ID, REALTOR_PASSWORD, REALTOR_NAME, 
+		REALTOR_PHONE, REALTOR_OFFICE_NAME, REALTOR_OFFICE_ADDRESS, REALTOR_REGISTRATION_NUM, 
+		REALTOR_SIGNUP_STATUS, REALTOR_REFUSE_REASON, REALTOR_SIGNUP_CREDAT, REALTOR_OFFICE_DETAIL_ADDRESS,
+		REALTOR_IMG_PATH
+		FROM REALTOR_SIGNUP
+		WHERE REALTOR_SIGNUP_NUM = #{realtorSignupNum}
+	</select>
+	
+	<!-- 중개사 가입 승인 여부 조회 -->
+	<select id="selectRealtorSignUpStatus" resultType="com.project.secu.realtorSignUp.vo.RealtorSignUpVO">
+		SELECT REALTOR_SIGNUP_STATUS, REALTOR_REFUSE_REASON
+		FROM REALTOR_SIGNUP
+		WHERE REALTOR_NAME = #{realtorName}
+		AND REALTOR_PHONE = #{realtorPhone}
+		AND REALTOR_REGISTRATION_NUM = #{realtorRegistrationNum}
+		ORDER BY REALTOR_SIGNUP_NUM DESC
+		LIMIT 1
+	</select>
+	
+	<!-- 해당 중개사 등록번호로 한 가입신청이 아직 확인중인 경우 조회 -->
+	<!-- 중개사 회원가입 신청에서 이미 해당 중개사 등록번호로 가입 신청하고 확인중인 경우 '이미 가입신청된 중개사이고 확인중이다.' 이런식으로 뜨고 신청 막을 생각임 -->
+	<select id="selectIsRealtorSignUpConfirming" resultType="int">
+		SELECT COUNT(1)
+		FROM REALTOR_SIGNUP
+		WHERE REALTOR_REGISTRATION_NUM = #{realtorRegistrationNum}
+		AND REALTOR_SIGNUP_STATUS = '확인중';
+	</select>
+</mapper>

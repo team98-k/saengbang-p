@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>권한 확인</title>
+</head>
+<body>
+	<h3>권한이 없습니다.</h3>
+	<button onclick="home()">홈으로</button>
+	<script>
+		function home(){
+			localStorage.clear();
+			location.href = "/api/logout";	
+		}
+	</script>
+</body>
+</html>

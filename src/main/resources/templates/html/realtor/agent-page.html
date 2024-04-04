@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+
+<head>
+	<div th:replace="html/fragment/header.html :: f-header"></div>
+	<link rel="stylesheet" th:href="@{/css/agent-page.css}">
+	<script type="application/javascript" th:src="@{/assets/js/web_support.js}" defer></script>
+</head>
+
+<body>
+	<div id="preloader">
+		<div id="status">&nbsp;</div>
+	</div>
+	<div th:replace="html/fragment/nav.html :: f-nav"></div>
+	<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">내 정보 수정</h5>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label>사진</label>
+						<div class="form-group" style="display: flex; gap: 10px;">
+							<label for="realtorImg">
+								<img id="realtorImgChange" th:src="@{/imgs/profile.png}" alt="your image"
+									style="width: 150px; height: 150px; object-fit: cover; border: 1px solid gray;">
+							</label>
+							<input type="file" accept="image/*" class="form-control" id="realtorImg" style="display: none;" onchange="preview(this)"></input>
+						</div>
+						<label>사무소 주소</label>
+						<div class="form-group" style="display: flex; gap: 10px;">
+							<input type="text" class="form-control" id="postCode" style="background-color: #FFFFFF;" readonly>
+							<button class="btn btn-default" id="button" onclick="findPostCode()" style="background-color: #FDC600;">
+								우편번호 찾기
+							</button>
+						</div>
+						<input type="text" id="chrealtorOfficeAddress" class="form-control" readonly>
+						<span id="guide" style="color:#999;display:none"></span>
+					</div>
+					<div class="form-group">
+						<div class="form-group">
+							<label>사무소 상세 주소</label>
+							<input type="text" class="form-control" id="chrealtorOfficeDetailAddress">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="form-group">
+							<label>사무소 이름</label>
+							<input type="text" class="form-control" id="chrealtorOfficeName">
+						</div>
+						<div class="form-group">
+							<label for="realtorCurrentPassword">현재 비밀번호</label>
+							<input type="password" class="form-control" id="realtorCurrentPassword" placeholder="현재 비밀번호">
+						</div>
+						<div class="form-group">
+							<label for="realtorPassword">새 비밀번호</label>
+							<input type="password" class="form-control" id="realtorPassword" placeholder="비밀번호">
+						</div>
+						<div class="form-group">
+							<label for="realtorPasswordCheck">새 비밀번호 확인</label>
+							<input type="password" class="form-control" id="realtorPasswordCheck" placeholder="비밀번호">
+							<p id="passwordCheckResult" style="font-weight: 600; color: red; display: none;"></p>
+						</div>
+						<div class="form-group" id="section-last">
+							<label>전화번호</label>
+							<input type="text" class="form-control" id="chrealtorPhone">
+						</div>
+					</div>
+					<p style="padding: 10px 10px; color: gray; text-align: center;">내 정보를 타인에게 유출되지 않도록 주의해주세요</p>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="clearInput()">취소</button>
+					<button onclick="updateRealtorInfo()" class="btn btn-primary" id="modify">수정</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content-area user-profiel">&nbsp;
+		<div class="container">
+			<div class="col-sm-10 col-sm-offset-1 profiel-container">
+				<div class="profiel-header">
+					<h3>
+						<b>부동산 정보</b>
+					</h3>
+					<hr>
+				</div>
+				<div class="clear" style="text-align: left;">
+					<div class="col-sm-5 col-sm-offset-1">
+						<div class="form-group">
+							<label>사진</label><br>
+							<img id="realtorImgView" th:src="@{/imgs/profile.png}" alt="your image"
+								style="width: 150px; height: 150px; object-fit: cover; border: 1px solid #dadada;">
+						</div>
+						<div class="form-group">
+							<label>이름</label>
+							<p id="realtorName"></p>
+						</div>
+						<div class="form-group">
+							<label>전화번호</label>
+							<p id="realtorPhone"></p>
+						</div>
+					</div>
+					<div class="col-sm-5">
+						<div class="form-group">
+							<label>중개사 사무소 주소 </label>
+							<p id="realtorOfficeAddress"></p>
+						</div>
+						<div class="form-group">
+							<label>중개사 사무소 이름 </label>
+							<p id="realtorOfficeName"></p>
+						</div>
+						<div class="form-group">
+							<label>공인중개사 등록 번호</label>
+							<p id="realtorRegistrationNum"></p>
+						</div>
+					</div>
+				</div>
+				<div style="text-align: center;">
+					<button id="myModalBtn" type="button" class="btn btn-primary" style="margin-bottom: 1rem;"
+						data-toggle="modal" data-target="#staticBackdrop">
+						내 정보 수정
+					</button>
+				</div>
+			</div>
+			<div class="row  pr0 padding-top-40 properties-page">
+				<div class="col-md-12 clear">
+					<h3 style="text-align: center;">내 매물 정보</h3>
+					<hr>
+					<div class="proerty-th">
+						<div class="rooms" id="rooms">
+							<div class="roomList" id="list-type">
+							</div>
+							<!-- <div id="page"></div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12 clear">
+				<div class="pagination" id="page" style="text-align: center; display: block">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="html/fragment/footer.html :: f-footer"></div>
+	<script th:src="@{/js/postcode.v2.js}"></script>
+	<script th:src="@{/js/agent-page.js}"></script>
+</body>
+
+</html>

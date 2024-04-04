@@ -1,0 +1,380 @@
+	.topMenu {
+		height: 50px;
+		width: 100%;
+		display: flex;
+		margin-top: 50px;
+	}
+
+	.topLogo {
+		font-size: 35px;
+		line-height: 1.8;
+		margin-left: 30px;
+	}
+
+	.topMenuNav {
+		width: 100%;
+		margin-left: 150px;
+		margin-right: 5%;
+		text-align: right;
+	}
+
+	.topMenuNav li {
+		list-style: none;
+		font-size: 25px;
+		margin-left: 30px;
+		display: inline-block;
+	}
+
+	a {
+		color: black;
+		text-decoration: none;
+	}
+
+
+	.filterMenu {
+		width: 100%;
+		height: 100%;
+		margin-top: 30px;
+		padding-top: 20px;
+		display: grid;
+		grid-template-rows: auto;
+		grid-template-columns: 400px 2.5fr;
+	}
+
+	.filterSearch {
+		width: 378px;
+		height: 60px;
+		display: flex;
+		padding: 0 10px 0 10px;
+		border: 1px solid lightgray;
+	}
+
+	#searchBar {
+		border: none;
+		height: 40px;
+		width: 250px;
+		font-size: 15px;
+		margin-top: 10px;
+	}
+	#searchBar:focus {
+		outline: none;
+	}
+	.filterBar {
+		width: 100%;
+		display: inline-block;
+		position: relative;
+		border: 1px solid lightgray;
+	}
+
+	.roomFilter {
+		margin: 0 20px;
+		height: 40px;
+		width: 150px;
+	}
+
+	.roomContent {
+		width: 300px;
+		height: 320px;
+		display: none;
+		position: absolute;
+		min-width: 160px;
+		background-color: #fff;
+		padding: 25px 30px 0;
+		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+		z-index: 10;
+		border: 1px solid lightgray;
+	}
+
+	.roomContent label {
+		display: flex;
+		margin: 0;
+	}
+
+	.roomContent h1 {
+		margin: 0;
+		font-size: 18px;
+	}
+
+	.roomContent p {
+		margin: 4px 0;
+		font-size: 13px;
+	}
+
+	.roomContent label input[type="checkbox"] {
+		width: 22px;
+		height: 22px;
+	}
+
+	.roomContent label p {
+		margin: 0;
+		line-height: 2;
+		padding-left: 8px;
+	}
+
+	.roomType {
+		padding: 15px 5px;
+		border-bottom: 1px solid lightgray;
+	}
+
+	.saleType {
+		padding: 15px 5px;
+		border-bottom: 1px solid lightgray;
+	}
+
+	.apart {
+		padding: 15px 5px;
+		border-bottom: 1px solid lightgray;
+	}
+
+	input[class="check"]+label {
+		display: inline-block;
+		top: 10px;
+		margin: 0px;
+		width: 20px;
+		height: 20px;
+		cursor: pointer;
+		border-radius: 5px;
+		border: 1px solid darkgray;
+	}
+
+	input[class="check"]:checked+label {
+		background-color: darkslategray;
+	}
+	input[class="check"]:checked+label::after {
+		content: '✔';
+		color: white;
+		padding: 0 3.5px 1px;
+	}
+
+	input[class="check"] {
+		display: none;
+	}
+
+
+	.roomSize {
+		height: auto;
+		width: auto;
+		margin: auto;
+		padding: 15px 5px;
+		box-sizing: border-box;
+	}
+
+	.inputSize {
+		display: flex;
+		width: max-content;
+		margin: 10px auto;
+	}
+
+	.inputSize label {
+		line-height: 25px;
+		font-size: 15px;
+	}
+
+	.inputSize input {
+		margin-left: 7px;
+		width: 100px;
+		height: 20px;
+		font-size: 15px;
+		text-align: right;
+	}
+
+	.pyeongSize {
+		display: flex;
+		width: max-content;
+		margin: 10px auto;
+	}
+
+	.pyeongSize label {
+		line-height: 25px;
+		font-size: 15px;
+	}
+
+	.pyeongSize input {
+		margin-left: 7px;
+		width: 100px;
+		height: 20px;
+		font-size: 15px;
+		text-align: right;
+	}
+
+	input::-webkit-inner-spin-button {
+		appearance: none;
+		-moz-appearance: none;
+		-webkit-appearance: none;
+	}
+
+	.filterReset {
+		width: 60px;
+		height: 40px;
+		margin-top: 10px;
+		margin-right: 20px;
+		justify-self: end;
+	}
+
+
+	.listAndMap {
+		display: grid;
+		width: 100%;
+		height: 730px;
+		grid-template-rows: auto;
+		grid-template-columns: 400px 2.5fr;
+	}
+
+	.lists {
+		width: auto;
+		overflow: auto;
+		border: 1px solid lightgray;
+	}
+	.items {
+		cursor: pointer;
+	}
+
+	.item {
+		display: grid;
+		width: auto;
+		height: 170px;
+		padding: 16px;
+		box-sizing: border-box;
+		grid-template-columns: 140px 56%;
+		grid-gap: 20px;
+	}
+
+	.itemImg {
+		width: 100%;
+		height: 100%;
+		box-sizing: border-box;
+	}
+
+	.itemImg img {
+		width: 100%;
+		height: 100%;
+	}
+
+	.itemInfo {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.itemInfo h1 {
+		height: 30px;
+		font-size: 18px;
+		margin: 0 0 2px;
+	}
+
+	.itemInfo p {
+		height: 24px;
+		font-size: 14px;
+		margin: 0 0 2px;
+	}
+
+	#kMap {
+		width: 100%;
+		height: 100%;
+		border: 1px solid lightgray;
+	}
+
+	.wrap {
+		position: absolute;
+		left: 0;
+		bottom: 40px;
+		width: 288px;
+		height: 132px;
+		margin-left: -144px;
+		text-align: left;
+		overflow: hidden;
+		font-size: 12px;
+		font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+		line-height: 1.5;
+	}
+
+	.wrap * {
+		padding: 0;
+		margin: 0;
+	}
+
+	.wrap .info {
+		width: 286px;
+		height: 120px;
+		border-radius: 5px;
+		border-bottom: 2px solid #ccc;
+		border-right: 1px solid #ccc;
+		overflow: hidden;
+		background: #fff;
+	}
+
+	.wrap .info:nth-child(1) {
+		border: 0;
+		box-shadow: 0px 1px 2px #888;
+	}
+
+	.info .title {
+		padding: 5px 0 0 10px;
+		height: 30px;
+		background: #eee;
+		border-bottom: 1px solid #ddd;
+		font-size: 18px;
+		font-weight: bold;
+	}
+
+	.info .close {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		color: #888;
+		width: 17px;
+		height: 17px;
+		background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');
+	}
+
+	.info .close:hover {
+		cursor: pointer;
+	}
+
+	.info .body {
+		position: relative;
+		overflow: hidden;
+	}
+
+	.info .desc {
+		position: relative;
+		margin: 13px 0 0 90px;
+		height: 75px;
+	}
+
+	.desc .ellipsis {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.desc .jibun {
+		font-size: 11px;
+		color: #888;
+		margin-top: -2px;
+	}
+
+	.info .img {
+		position: absolute;
+		top: 6px;
+		left: 5px;
+		width: 73px;
+		height: 71px;
+		border: 1px solid #ddd;
+		color: #888;
+		overflow: hidden;
+	}
+
+	.info:after {
+		content: '';
+		position: absolute;
+		margin-left: -12px;
+		left: 50%;
+		bottom: 0;
+		width: 22px;
+		height: 12px;
+		background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+	}
+
+	.info .link {
+		color: #5085BB;
+	}

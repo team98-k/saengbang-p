@@ -1,0 +1,143 @@
+	.topMenu {
+		height: 50px;
+		width: 100%;
+		display: flex;
+		margin-top: 50px;
+	}
+	.topLogo {
+		font-size: 35px;
+		line-height: 1.8;
+		margin-left: 30px;
+	}
+	.topMenuNav {
+		width: 100%;
+		margin-left: 150px;
+		margin-right: 5%;
+		text-align: right;
+	}
+	.topMenuNav li {
+		list-style: none;
+		font-size: 25px;
+		margin-left: 30px;
+		display: inline-block;
+	}
+	a {
+		color: black;
+		text-decoration: none;
+	}
+	
+	
+	.descript {
+		width: 60%;
+		height: 50%;
+		margin: auto;
+		line-height: 4;
+		font-size: 60px;
+	}
+	
+	
+	.QnAList {
+		width: 60%;
+		height: auto;
+		margin: auto;
+		box-sizing: border-box; 
+	}
+	
+	.QnAs {
+		margin: 15px 0 15px 0;
+	}
+	
+	.QnAList ul {
+		padding: 15px 0 0 0;
+		margin: 0 15px;
+		list-style: none;
+		border-top: 2px solid;
+		box-sizing: border-box;
+	}
+
+	.QnAList li {
+		text-align: center;
+		display: inline-block;
+	}
+
+	.QnASet {
+		margin: 0 15px;
+	}
+	
+	.que:first-child {
+		border-top: 1px solid lightgray;
+	}
+
+	.que {
+		position: relative;
+		padding: 17px 0;
+		cursor: pointer;
+		font-size: 14px;
+		border-bottom: 1px solid #dddddd;
+
+	}
+
+	.que::before {
+		display: inline-block;
+		font-size: 14px;
+		color: #006633;
+		margin: 0 5px;
+	}
+
+	.que.on>span {
+		font-weight: bold;
+		color: #006633;
+	}
+
+	.naeyong {
+		display: none;
+		overflow: hidden;
+		font-size: 14px;
+		padding: 27px 50px;
+		box-sizing: border-box;
+		background-color: #f4f4f2;
+	}
+
+	.naeyong::before {
+		display: inline-block;
+		font-size: 14px;
+		font-weight: bold;
+		color: #666;
+		margin: 0 5px;
+	}
+
+	.naeyong .answer {
+		padding-bottom: 10px;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	.naeyong .anw {
+		display: flex;
+		box-sizing: border-box;
+		padding: 10px 25px 0 25px;
+	}
+	.anwIcon {
+		margin-right: 10px;
+	}
+	.naeyong .textArea {
+		display: none;
+		width: 100%;
+		height: 150px;
+		padding-top: 10px;
+		box-sizing: border-box;
+	}
+	.textArea textarea {
+		resize: none;
+		width: 100%;
+		height: 100%;
+		padding: 5px 5px;
+		box-sizing: border-box;
+	}
+	
+	.edit {
+		padding: 10px 25px 0 25px;
+	}
+	.edit #edit {
+		float: right;
+	}

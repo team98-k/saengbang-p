@@ -1,0 +1,36 @@
+	body {
+		margin: 0;
+		width: 100%;
+		border-bottom: 1px solid darkgray;
+	}
+	
+	p {
+		margin: 0
+	}
+	h1 {
+		margin: 0;
+		width: auto;
+		height: 24px;
+		padding: 15px 30px;
+		font-size: 18px;
+		color: ghostwhite;
+		background-color: darkslategray;
+	}
+	
+	.middle {
+		padding: 30px;
+	}
+	.textBox {
+		width: auto;
+		height: auto;
+		padding: 18px 18px;
+		border: 1px solid lightgray;
+	}
+	.buttons {
+		margin-top: 30px;
+		text-align: center;
+	}
+	.buttons button{
+		height: 40px;
+		width: 120px;
+	}

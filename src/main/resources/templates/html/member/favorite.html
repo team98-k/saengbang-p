@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+
+<head>
+    <div th:replace="html/fragment/header.html :: f-header"></div>
+    <link rel="stylesheet" th:href="@{/css/recently.css}">
+</head>
+
+<body>
+    <div id="preloader">
+        <div id="status">&nbsp;</div>
+    </div>
+    <div th:replace="html/fragment/nav.html :: f-nav"></div>
+    <!-- property area -->
+    <p>
+    <div class="container" style="text-align: center">
+        <span><a class="btn btn-primary" onclick="goToRecently()">최근 본 목록</a></span>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span></span><a class="btn btn-primary">관심 목록</a></span>
+    </div>
+    </p>
+    <div class="text-center mb-0 h3 display-2">관심 목록</div>
+    <div class="properties-area recent-property">
+        <div class="container">
+            <div class="row  pr0 padding-top-40 properties-page">
+                <div class="col-md-12 clear">
+                    <div id="favoriteCount" style="text-align: center;"></div>
+                    <div id="list-type" class="proerty-th">
+                        <div class="text-center mb-0 h1 display-2">관심 매물이 없습니다.</div>
+                    </div>
+                </div>
+                <div class="col-md-12 clear">
+                    <div class="pagination" style="text-align: center; display: block">
+                        <ul>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="html/fragment/footer.html :: f-footer"></div>
+    <script th:src="@{/js/favorite.js}"></script>
+</body>
+
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+
+<head>
+    <div th:replace="html/fragment/header.html :: f-header"></div>
+    <!-- 부트스트랩 관련 무 css -->
+    <link rel="stylesheet" th:href="@{/css/detail.css}">
+    <link rel="stylesheet" th:href="@{/css/add-qna.css}">
+    <link rel="stylesheet" th:href="@{/css/detail-map/detail-map.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/lightslider.min.css}">
+
+
+    <script
+        th:src="@{'//dapi.kakao.com/v2/maps/sdk.js?'+'appkey='+${@environment.getProperty('kakao.appKey')}}+'&libraries=services,clusterer,drawing'"></script>
+</head>
+
+<body>
+    <div style="padding-bottom: 115px;">
+        <div th:replace="html/fragment/nav.html :: f-nav"></div>
+    </div>
+    <div id="preloader">
+        <div id="status">&nbsp;</div>
+    </div>
+    <!-- Body content -->
+    <!-- End of nav bar -->
+    <div class="page-head">
+        <div class="container">
+            <div class="row">
+                <div class="page-head-content">
+                    <h1 class="page-title"></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End page header -->
+
+    <!-- property area -->
+    <div class="content-area single-property" style="background-color: #FCFCFC;">&nbsp;
+        <div class="container">
+            <div class="clearfix padding-top-40">
+                <div class="col-md-8 single-property-content prp-style-1 ">
+                    <div class="row">
+                        <div class="light-slide-item">
+                            <div class="clearfix">
+                                <div class="favorite-and-print">
+                                    <div style="text-align: center;">
+                                        <button style="height: 45px; width: 45px; border-radius: 10px;" id="like" onclick="addFavorite()">
+                                            <img th:src="@{/imgs/unliked.png}" width="40px" height="40px">
+                                        </button>
+                                        <button style="height: 45px; width: 45px; border-radius: 10px;" id="likeCalcel" onclick="deleteFavorite()">
+                                            <img th:src="@{/imgs/liked.png}" width="40px" height="40px">
+                                        </button>
+                                    </div>
+                                </div>
+                                <ul id="image-gallery" class="gallery list-unstyled cS-hidden"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-property-wrapper">
+                        <div class="single-property-header">
+                            <h1 class="property-title pull-left" id="roomDetailTitle"></h1>
+                            <div id="prices"></div>
+                        </div>
+                        <div class="property-meta entry-meta clearfix ">
+                            <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
+                                <span class="property-info icon-area">
+                                    <img th:src="@{/assets/img/icon/room-orange.png}">
+                                </span>
+                                <span class="property-info-entry">
+                                    <span class="property-info-label">전용면적</span>
+                                    <span class="property-info-value" id="roomSpaceMeter"></span><b
+                                        class="property-info-unit">㎡</b>
+                                </span>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
+                                <span class="property-info-icon icon-bed">
+                                    <img th:src="@{/assets/img/icon/bed-orange.png}">
+                                </span>
+                                <span class="property-info-entry">
+                                    <span class="property-info-label">방 수</span>
+                                    <span class="property-info-value" id="roomBedsNum"></span>
+                                </span>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
+                                <span class="property-info-icon icon-bed">
+                                    <img th:src="@{/assets/img/icon/cars-orange.png}">
+                                </span>
+                                <span class="property-info-entry">
+                                    <span class="property-info-label">주차 가능 여부</span>
+                                    <span class="property-info-value" id="roomParking"></span>
+                                </span>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-3 col-md-3 p-b-15">
+                                <span class="property-info-icon icon-garage">
+                                    <img th:src="@{/assets/img/icon/shawer-orange.png}">
+                                </span>
+                                <span class="property-info-entry">
+                                    <span class="property-info-label">욕실 수</span>
+                                    <span class="property-info-value" id="roomBathNum"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- .property-meta -->
+
+                        <div class="section">
+                            <h4 class="s-property-title">상세 설명</h4>
+                            <div class="s-property-content">
+                                <p id="roomDetail"></p>
+                            </div>
+                        </div>
+                        <!-- End description area  -->
+
+                        <div class="section additional-details">
+                            <h4 class="s-property-title">상세 정보</h4>
+                            <ul class="additional-details-list clearfix">
+                                <li>
+                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">관리비</span>
+                                    <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"
+                                        id="roomMaintenanceCost"></span>
+                                </li>
+                                <li>
+                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">방 종류</span>
+                                    <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry" id="roomType"></span>
+                                </li>
+                                <li>
+                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">전체 층 수/매물 층 수</span>
+                                    <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">
+                                        <span id="roomBuildingFloor"></span>
+                                        /
+                                        <span id="roomFloor"></span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">방향</span>
+                                    <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry" id="roomDirection"></span>
+                                </li>
+                                <li>
+                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">난방 종류</span>
+                                    <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry" id="roomHeating"></span>
+                                </li>
+                                <li>
+                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">엘레베이터 유무</span>
+                                    <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry" id="roomElevator"></span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="section property-video">
+                            <h4 class="s-property-title">위치 및 주변시설</h4>
+                            <p>
+                                <span id="roomRoadAddress">경기도</span>
+                                <span id="roomDetailAddress">무슨아파트</span>
+                            </p>
+                            <div>
+                                <div id="category">
+                                    <li id="BK9" data-order="0">
+                                        <div class="category_bg bank"></div>
+                                        은행
+                                    </li>
+                                    <li id="MT1" data-order="1">
+                                        <div class="category_bg mart"></div>
+                                        마트
+                                    </li>
+                                    <li id="PM9" data-order="2">
+                                        <div class="category_bg pharmacy"></div>
+                                        약국
+                                    </li>
+                                    <li id="OL7" data-order="3">
+                                        <div class="category_bg oil"></div>
+                                        주유소
+                                    </li>
+                                    <li id="CE7" data-order="4">
+                                        <div class="category_bg cafe"></div>
+                                        카페
+                                    </li>
+                                    <li id="CS2" data-order="5">
+                                        <div class="category_bg store"></div>
+                                        편의점
+                                    </li>
+                                </div>
+                            </div>
+                            <div class="map">
+                                <div class="map_wrap">
+                                    <div id="map"
+                                        style="width:100%;height:502px;position:relative;overflow:hidden; z-index: 1;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End video area  -->
+
+                        <div class="section" id="roomInquirySection">
+                            <div class="QnA">
+                                <h4 class="s-property-title">매물 문의</h4>
+                                <p>매물에 관해 궁금한 것이 있으면 문의하세요</p>
+                                <div id="modalBtnAndModal">
+                                    <!-- Button trigger modal -->
+                                    <button id="qnaModalBtn" type="button" class="btn btn-primary"
+                                        style="margin-bottom: 1rem;" data-toggle="modal" data-target="#staticBackdrop">
+                                        문의 작성
+                                    </button>
+    
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false"
+                                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="staticBackdropLabel">
+                                                        매물 문의
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h3 style="margin-top: 0;">문의사항 내용</h3>
+                                                    <textarea class="modal-roomInquiryDetail" id="roomInquiryDetail"
+                                                        placeholder="문의 내용을 입력하세요"></textarea>
+                                                    <br>
+                                                    <div style="margin-top: 5px;">
+                                                        <label style="display: inline;" for="secret">비공개</label>
+                                                        <input style="display: inline; width: 50px;" type="checkbox" value="비공개" id="secret">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button id="addRoomInquiryBtn" type="button" class="btn btn-primary"
+                                                        data-dismiss="modal" onclick="addRoomInquiry()">등록</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 문의 목록 -->
+                            <ul class="qna-ul" id="qnaList" style="border-top: 2px solid;"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 p0" style="position: sticky; top:11rem;">
+                    <aside class="sidebar sidebar-property blog-asside-right">
+                        <div class="dealer-widget">
+                            <div class="dealer-content">
+                                <div class="inner-wrapper">
+                                    <div class="clear" id="realtorInfo" style="cursor: pointer;">
+                                        <div class="col-xs-4 col-sm-4" style="height: 100px; width: 100px;">
+                                            <img style="height: 100px; width: 100px; object-fit: cover; border-radius: 10px;" id="realtorImg">
+                                        </div>
+                                        <div class="col-xs-8 col-sm-8 ">
+                                            <h3 class="dealer-name">
+                                                <h4 style="color: #FCFCFC; font-weight: bold;" id="realtorName"></h4>
+                                                <a href="" style="color: #FCFCFC; font-weight: bold;" id="realtorOfficeName"></a>
+                                            </h3>
+                                        </div>
+                                    </div>
+
+                                    <div class="clear">
+                                        <ul class="dealer-contacts">
+                                            <li>
+                                                <i class="pe-7s-map-marker strong"></i>
+                                                <span id="realtorOfficeAddress"></span> 
+                                                <span id="realtorOfficeDetailAddress"></span>
+                                            </li>
+                                            <!-- <li><i class="pe-7s-mail strong"> </i> <span id="realtorRegistrationNum">12345-1234-12345</span></li> -->
+                                            <li>
+                                                <i class="pe-7s-call strong"></i> 
+                                                <span id="realtorPhone"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer area-->
+    <div th:replace="html/fragment/footer.html :: f-footer"></div>
+
+    <script th:src="@{/js/detail-map/detail-map.js}"></script>
+    <script th:src="@{/js/detail.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/lightslider.min.js}"></script>
+</body>
+
+</html>

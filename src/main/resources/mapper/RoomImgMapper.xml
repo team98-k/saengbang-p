@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.secu.roomImg.mapper.RoomImgMapper">
+	<!-- 해당 매물의 사진 조회 -->
+	<select id="selectRoomImgList" resultType="com.project.secu.roomImg.vo.RoomImgVO">
+		SELECT ROOM_IMG_NUM, ROOM_NUM, ROOM_IMG_NAME, ROOM_IMG_PATH, ROOM_IMG_SEQUENCE
+		FROM ROOM_IMG
+		WHERE ROOM_NUM = #{roomNum}
+		ORDER BY ROOM_IMG_SEQUENCE ASC
+	</select>
+	
+	<!-- 매물 사진 등록 -->
+	<insert id="insertRoomImg">
+		INSERT INTO ROOM_IMG(ROOM_NUM, ROOM_IMG_NAME, ROOM_IMG_PATH, ROOM_IMG_SEQUENCE)
+		VALUES(#{roomNum}, #{roomImgName}, #{roomImgPath}, #{roomImgSequence})
+	</insert>
+	
+	<!-- 해당 매물의 사진 모두 삭제 -->
+	<delete id="deleteRoomImg">
+		DELETE FROM ROOM_IMG
+		WHERE ROOM_NUM = #{roomNum}
+	</delete>
+	
+	<!-- 매물 사진 수정 -->
+	<update id="updateRoomImg">
+		UPDATE ROOM_IMG
+		<set>
+			<if test='roomImgName != null and roomImgName != ""'>
+				ROOM_IMG_NAME = #{roomImgName},
+			</if>
+			<if test='roomImgPath != null and roomImgPath != ""'>
+				ROOM_IMG_PATH = #{roomImgPath},
+			</if>
+			<if test='roomImgSequence != null and roomImgSequence != ""'>
+				ROOM_IMG_SEQUENCE = #{roomImgSequence}
+			</if>
+		</set>
+		WHERE ROOM_IMG_NUM = #{roomImgNum}
+	</update>
+</mapper>

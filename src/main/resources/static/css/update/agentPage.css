@@ -1,0 +1,166 @@
+	li {
+		list-style: none;
+	}
+	
+	.topMenu {
+		height: 50px;
+		width: 100%;
+		display: flex;
+		margin-top: 50px;
+	}
+	.topLogo {
+		font-size: 35px;
+		line-height: 1.8;
+		margin-left: 30px;
+	}
+	.topMenuNav {
+		width: 100%;
+		margin-left: 150px;
+		margin-right: 5%;
+		text-align: right;
+	}
+	.topMenuNav li {
+		font-size: 25px;
+		margin-left: 30px;
+		display: inline-block;
+	}
+	a {
+		color: black;
+		text-decoration: none;
+	}
+	
+	
+	.infoBox {
+		height: auto;
+		width: 750px;
+		margin: 0 auto;
+		margin-top: 130px;
+		font-size: 60px;
+		text-align: center;
+	}
+	.idAndPwd {
+		height: auto;
+		width: 90%;
+		padding: 10px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 10px;
+		border-top: 1px solid lightgray;
+		border-bottom: 1px solid lightgray;
+		display: flex;
+	}
+	.ID {
+		display: flex;
+		width: 350px;
+	}
+	.changeInfo {
+		display: flex;
+		width: 350px;
+	}
+	.etc {
+		height: auto;
+		width: 90%;
+		padding: 10px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 10px;
+		border-top: 1px solid lightgray;
+		border-bottom: 1px solid lightgray;
+		display: flex;
+	}
+	.nickName {
+		display: flex;
+		width: 250px;
+	}
+	.Email {
+		display: flex;
+		width: 250px;
+	}
+	.pNumber {
+		display: flex;
+		width: 250px;
+	}
+	.AgentOnly {
+		height: auto;
+		width: 90%;
+		padding: 10px;
+		margin: 0 auto;
+		display: flex;
+		margin-bottom: 10px;
+		border-top: 1px solid lightgray;
+		border-bottom: 1px solid lightgray;
+	}
+	.AgentLocate {
+		display: flex;
+		width: 250px;
+	}
+	.AgentName {
+		display: flex;
+		width: 250px;
+	}
+	.AgentNum {
+		display: flex;
+		width: 250px;
+	}
+	.signUpBtn #btn {
+		width: 90%;
+		height: 50px;
+		font-size: 25px;
+		margin-bottom: 10px;
+	}
+	
+	.rooms {
+		margin: 0 auto;
+		height: auto;
+		width: auto;
+	}
+	.roomList {
+		width: 1210px;
+		display: flex;
+		margin: auto;
+		grid-gap: 30px;
+	}
+	.room {
+		width: 590px;
+		height: 250px;
+		display: inline-block;
+		border: 1px solid lightgray;
+	}
+	.buttons {
+		width: 100%;
+		height: 50px;
+		background-color: lightgray;
+	}
+	.buttons ul {
+		margin: 0;
+		margin-right: 10px;
+		padding: 0;
+	}
+	.buttons li {
+		float: right;
+		width: auto;
+		height: 30px;
+		padding: 0 5px;
+		font-size: 12px;
+		margin-top: 8px;
+		margin-left: 10px;
+		line-height: 30px;
+		text-align: center;
+		display: inline-block;
+		border: 1px solid black;
+	}
+	.infos {
+		display: flex;
+		height: 80%;
+		width: 100%;
+		padding: 15px;
+		box-sizing: border-box;
+	}
+	.image {
+		width: 300px;
+		height: 100%;
+		box-sizing: border-box;
+	}
+	.desc li {
+		margin: 10px 0;
+	}

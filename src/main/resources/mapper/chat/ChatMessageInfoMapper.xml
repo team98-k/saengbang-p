@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.secu.common.mapper.ChatMessageInfoMapper">
+	<insert id="insertChatMessageInfo">
+		INSERT INTO CHAT_MESSAGE_INFO (CMI_MESSAGE, CMI_SENT_TIME, CMI_SENDER_UI_NUM, CMI_RECEIVE_UI_NUM)
+		VALUES(#{cmiMessage}, #{cmiSentTime}, #{cmiSenderUiNum}, #{cmiReceiveUiNum})
+	</insert>
+	<select id="selectChatMessageInfos">
+		SELECT *
+		FROM CHAT_MESSAGE_INFO
+		WHERE (
+		CMI_SENDER_UI_NUM = #{cmiSenderUiNum}
+		AND 
+		CMI_RECEIVE_UI_NUM = #{cmiReceiveUiNum}
+		)
+		OR (
+		CMI_SENDER_UI_NUM = #{cmiReceiveUiNum}
+		AND 
+		CMI_RECEIVE_UI_NUM = #{cmiSenderUiNum}
+		)
+		ORDER BY CMI_NUM DESC
+	</select>
+	<update id="updateChatMessageInfoReceivedTime">
+		UPDATE CHAT_MESSAGE_INFO
+		SET CMI_RECEIVED_TIME = #{cmiReceivedTime}
+		WHERE CMI_SENDER_UI_NUM = #{cmiSenderUiNum}
+		AND CMI_RECEIVE_UI_NUM = #{cmiReceiveUiNum}
+	</update>
+</mapper>

@@ -1,0 +1,73 @@
+	.section {
+		display: flex;
+		padding: 5px;	/* 2023-12-23 류승호가 수정 10 -> 5 */
+		margin: 10px
+	}
+		
+	 button {
+		width: 130px;
+		margin-left: 10px;
+		background-color:#FDC600;
+		color: #000;
+		border: none;
+		border-radius: 10px;
+	}
+ button:hover {
+		background-color:#FDC600;
+	}
+	/*.section button:active {
+		margin-left: 10px;
+		background-color: white;
+		color: teal;
+	}*/
+	
+	
+	
+	.signUpBox input {
+		width: 400px;
+		height: 44px;
+		font-size: 15px;
+		padding-left: 10px;
+		border-style: solid  ;
+		border-width: 1px;
+		border-radius:none;
+	}
+
+	.signUpBox {
+		height: auto;
+		width: 500px;
+		margin: 0 auto;
+		margin-top: 50px; /* 2023-12-23 류승호가 수정 130 -> 50 */
+		/* font-size: 60px; 2023-12-23 류승호가 삭제 */
+		text-align: center;
+		border: 1px solid lightgray;
+		border-radius: 10px;
+	}
+	.area {
+		height: auto;
+		width: 400px;
+		padding: 5px;
+		margin: 0 auto;
+		margin-bottom: 10px;
+		border: 1px solid lightgray;
+		border-radius: 10px;
+	}
+	
+	.signUpBtn #btn {
+		width: 90%;
+		height: 30px;
+		font-size: 25px;
+		margin-bottom: 10px;
+		background-color:#FDC600;
+		color:#000;
+		border: none;
+		border-radius: 10px;
+	}
+	.signUpBtn #btn:hover {
+		background-color:#FDC600;
+	}
+	
+	.check {
+		margin: 0;
+		
+	}

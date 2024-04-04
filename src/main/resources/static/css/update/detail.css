@@ -1,0 +1,516 @@
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+		scroll-behavior: smooth;
+	}
+
+	.topMenu {
+		height: 50px;
+		width: 100%;
+		display: flex;
+		margin-top: 50px;
+	}
+
+	.topLogo {
+		font-size: 35px;
+		line-height: 1.8;
+		margin-left: 30px;
+	}
+
+	.topMenuNav {
+		width: 100%;
+		margin-left: 150px;
+		margin-right: 5%;
+		text-align: right;
+	}
+
+	.topMenuNav li {
+		list-style: none;
+		font-size: 25px;
+		margin-left: 30px;
+		display: inline-block;
+	}
+
+	a {
+		color: black;
+		text-decoration: none;
+	}
+
+
+	.detail {
+		height: auto;
+		width: auto;
+		margin-top: 30px;
+	}
+
+	.pictureBox {
+		width: 100%;
+		height: 100%;
+		padding-top: 40px;
+	}
+
+	.picArea {
+		width: 1141.8px;
+		margin: 0 auto;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+
+	.innerArea {
+		width: auto;
+		height: auto;
+		display: grid;
+		gap: 5px 5px;
+		grid-template-rows: repeat(2, 220px);
+		grid-template-columns: 2fr repeat(2, 1fr);
+		grid-template-areas:
+			"big small1 small2"
+			"big small3 small4";
+	}
+
+	.bigPic {
+		width: auto;
+		height: auto;
+		grid-area: big;
+		overflow: hidden;
+		position: relative;
+		border: 1px solid black;
+	}
+
+	.smallPic1 {
+		width: auto;
+		height: auto;
+		overflow: hidden;
+		position: relative;
+		grid-area: small1;
+		border: 1px solid black;
+	}
+
+	.smallPic2 {
+		width: auto;
+		height: auto;
+		overflow: hidden;
+		position: relative;
+		grid-area: small2;
+		border: 1px solid black;
+	}
+
+	.smallPic3 {
+		width: auto;
+		height: auto;
+		overflow: hidden;
+		position: relative;
+		grid-area: small3;
+		border: 1px solid black;
+	}
+
+	.smallPic4 {
+		width: auto;
+		height: auto;
+		overflow: hidden;
+		position: relative;
+		grid-area: small4;
+		border: 1px solid black;
+	}
+	
+	.innerArea img {
+		width: 100%;
+		height: 100%;
+		transition: transform 0.25s ease-in-out;
+	}
+	
+	.innerArea img:hover {
+		transform: scale(1.2);
+		transition: transform 0.25s ease-in-out;
+	}
+	
+	#enlarge {
+		z-index: 1;
+		height: 40px;
+		top: 170px;
+		left: 145px;
+		width: 130px;
+		padding: 6px 0;
+		cursor:pointer;
+		position: absolute;
+		text-align: center;
+		border-radius: 3px;
+		color: ghostwhite;
+		box-sizing: border-box;
+		border: 1px solid lightgray;
+		background-color: darkslategray;
+	}
+
+	.imgModal {
+		display: none;
+		position: fixed;
+		z-index: 2;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		padding: 100px 20px 100px 20px;
+		background-color: rgba(0, 0, 0, 0.7);
+	}
+
+	.imgContent {
+		position: absolute;
+		width: 1280px;
+		height: 720px;
+		left: 50%;
+		transform: translateX(-50%);
+		background-color: white;
+	}
+	.imgContent .close {
+		position: absolute;
+		top: 10px;
+		left: 1240px;
+		width: 25px;
+		height: 25px;
+		font-size: 35px;
+	}
+	.imgContent #prevButton {
+		position: absolute;
+		top: 350px;
+		left: 20px;
+		font-size: 40px;
+		color: ghostwhite;
+		background-color: gray;
+		cursor: pointer;
+	}
+	.imgContent #nextButton {
+		position: absolute;
+		top: 350px;
+		left: 1235px;
+		font-size: 40px;
+		color: ghostwhite;
+		background-color: gray;
+		cursor: pointer;
+	}
+
+	.detailBox {
+		display: grid;
+		width: 60%;
+		height: auto;
+		margin: 0 auto;
+		padding-top: 70px;
+		padding-left: 10px;
+		padding-right: 10px;
+		grid-gap: 40px;
+		grid-template-columns: 3fr 1fr;
+		grid-template-rows: auto;
+	}
+
+	.dMenu {
+		height: auto;
+		width: 100%;
+		display: grid;
+		grid-template-columns: auto;
+		grid-template-rows: auto;
+		grid-gap: 65px;
+		border: 1px solid black;
+	}
+
+	.priceTab {
+		height: auto;
+		width: 100%;
+		border: 1px solid lightgray;
+	}
+
+	.roomTab {
+		height: auto;
+		width: 100%;
+		border: 1px solid lightgray;
+	}
+
+	.anotherRoom {
+		width: 100%;
+		height: 250px;
+		border: 1px solid lightgray;
+	}
+
+	.descTab {
+		width: 100%;
+		height: 500px;
+		border: 1px solid lightgray;
+	}
+
+	.mapArea {
+		height: auto;
+		width: 100%;
+		border: 1px solid lightgray;
+	}
+
+	.map {
+		width: 100%;
+		height: 500px;
+		border: 1px solid lightgray;
+	}
+
+	.QnATab {
+		height: auto;
+		width: 100%;
+		border: 1px solid lightgray;
+	}
+
+	.QnAList {
+		width: 95%;
+		height: auto;
+		margin: 15px auto;
+		box-sizing: border-box;
+	}
+
+	.QnATab ul {
+		padding: 15px 0 0 0;
+		margin: 0 15px;
+		list-style: none;
+		border-top: 2px solid;
+		box-sizing: border-box;
+	}
+
+	.QnATab li {
+		text-align: center;
+		display: inline-block;
+	}
+
+
+	.que:first-child {
+		border-top: 1px solid lightgray;
+	}
+
+	.que {
+		position: relative;
+		padding: 17px 0;
+		cursor: pointer;
+		font-size: 14px;
+		border-bottom: 1px solid #dddddd;
+
+	}
+
+	.que::before {
+		display: inline-block;
+		font-size: 14px;
+		color: #006633;
+		margin: 0 5px;
+	}
+
+	.que.on>span {
+		font-weight: bold;
+		color: #006633;
+	}
+
+	.naeyong {
+		display: none;
+		overflow: hidden;
+		font-size: 14px;
+		padding: 27px 50px;
+		box-sizing: border-box;
+		background-color: #f4f4f2;
+	}
+
+	.naeyong::before {
+		display: inline-block;
+		font-size: 14px;
+		font-weight: bold;
+		color: #666;
+		margin: 0 5px;
+	}
+
+	.naeyong .answer {
+		padding-bottom: 10px;
+		width: 100%;
+		border-bottom: 1px solid lightgray;
+		box-sizing: border-box;
+	}
+
+	.naeyong .anw {
+		display: flex;
+		box-sizing: border-box;
+		padding: 10px 25px 0 25px;
+	}
+	.anwIcon {
+		margin-right: 10px;
+	}
+	.naeyong .textArea {
+		display: none;
+		width: 100%;
+		height: 150px;
+		padding-top: 10px;
+		box-sizing: border-box;
+	}
+	.textArea textarea {
+		resize: none;
+		width: 100%;
+		height: 100%;
+		padding: 5px 5px;
+		box-sizing: border-box;
+	}
+	
+	.edit {
+		padding: 10px 25px 0 25px;
+	}
+	.edit #edit {
+		float: right;
+	}
+
+	.fMenu {
+		top: 110px;
+		width: 300px;
+		height: 420px;
+		position: sticky;
+		padding: 30px;
+		border: 1px solid black;
+	}
+
+	.itemNum {
+		border-top: 1px solid lightgray;
+		border-bottom: 1px solid lightgray;
+	}
+
+	.price {
+		margin-top: 20px;
+		border-top: 1px solid lightgray;
+		border-bottom: 1px solid lightgray;
+	}
+
+	.desc {
+		margin-top: 20px;
+		border-top: 1px solid lightgray;
+		border-bottom: 1px solid lightgray;
+	}
+
+	.agent {
+		margin-top: 20px;
+		border-top: 1px solid lightgray;
+		border-bottom: 1px solid lightgray;
+	}
+
+	.subMenuNav {
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 60px;
+		background-color: aqua;
+	}
+
+	.MenuBar {
+		width: 1180px;
+		margin: 0 auto;
+		display: flex;
+		padding: 0 10px 0 10px;
+	}
+
+	.MenuBar ul {
+		padding: 0;
+	}
+
+	.MenuBar li {
+		cursor: pointer;
+		list-style: none;
+		font-size: 22px;
+		margin-left: 30px;
+		display: inline-block;
+	}
+
+
+	.modal {
+		display: none;
+		position: fixed;
+		z-index: 2;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		padding: 100px 20px 100px 20px;
+		background-color: rgba(0, 0, 0, 0.7);
+	}
+
+	.PopUp {
+		position: absolute;
+		z-index: 3;
+		left: 50%;
+		height: auto;
+		width: 360px;
+		transform: translateX(-50%);
+		background-color: #fff;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	}
+
+	.modalTop {
+		height: auto;
+		display: flex;
+		padding: 24px 0 24px 32px;
+		border-bottom: 1px solid lightgray;
+	}
+
+	.modalTop h3 {
+		margin: 0;
+		display: flex;
+		height: 25px;
+	}
+
+	.close {
+		position: absolute;
+		right: 30px;
+		padding: 0;
+		border: none;
+		cursor: pointer;
+		font-size: 25px;
+		line-height: 25px;
+		background-color: transparent;
+	}
+
+	.modalBody {
+		padding: 32px;
+	}
+
+	.modalAgent {
+		margin: 0;
+		display: flex;
+		margin-bottom: 25px;
+	}
+
+	.agentLink {
+		margin-left: 15px;
+	}
+
+	.agentLink p {
+		margin: 0;
+		display: flex;
+	}
+
+	.agentLink .agentAdd {
+		margin-top: 5px;
+	}
+
+	.agentInfo ul {
+		margin: 0;
+		padding: 0 0 24px 0;
+		border-bottom: 1px solid lightgray;
+	}
+
+	.agentInfo li {
+		display: flex;
+		list-style: none;
+	}
+
+	.agentInfo label {
+		margin-right: 5px;
+	}
+
+	.agentInfo p {
+		margin: 0;
+	}
+
+	.pNumber {
+		display: flex;
+		margin-top: 25px;
+		flex-direction: column;
+	}
+
+	.pNumber p {
+		width: auto;
+		margin: 0;
+		text-align: center;
+	}
